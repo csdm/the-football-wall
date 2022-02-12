@@ -131,4 +131,87 @@ public class StatisticBean {
 		}
 		return this;
 	}
+	
+	public StatisticBean setFreeKickAccuracy(Integer freeKickAccuracy) {
+		if(freeKickAccuracy < 1 || freeKickAccuracy > 100 || freeKickAccuracy == null) {
+			this.freeKickAccuracy = 50;
+		} else {
+			this.freeKickAccuracy = freeKickAccuracy.intValue();
+		}
+		return this;
+	}
+	
+	public StatisticBean setShortPassing(Integer shortPassing) {
+		if(shortPassing < 1 || shortPassing > 100 || shortPassing == null) {
+			this.shortPassing = 50;
+		} else {
+			this.shortPassing = shortPassing.intValue();
+		}
+		return this;
+	}
+	
+	public StatisticBean setLongPassing(Integer longPassing) {
+		if(longPassing < 1 || longPassing > 100 || longPassing == null) {
+			this.longPassing = 50;
+		} else {
+			this.longPassing = longPassing.intValue();
+		}
+		return this;
+	}
+	
+	public StatisticBean setCurve(Integer curve) {
+		if(curve < 1 || curve > 100 || curve == null) {
+			this.curve = 50;
+		} else {
+			this.curve = curve.intValue();
+		}
+		return this;
+	}
+	
+	public StatisticBean setAgility(Integer agility) {
+		if(agility < 1 || agility > 100 || agility == null) {
+			this.agility = 50;
+		} else {
+			this.agility = agility.intValue();
+		}
+		return this;
+	}
+	
+	public StatisticBean setBalance(Integer balance) {
+		if(balance < 1 || balance > 100 || balance == null) {
+			this.agility = 50;
+		} else {
+			this.agility = balance.intValue();
+		}
+		return this;
+	}
+	
+	public StatisticBean setReactions(Integer reactions) {
+		if(reactions < 1 || reactions > 100 || reactions == null) {
+			this.reactions = 50;
+		} else {
+			this.reactions = reactions.intValue();
+		}
+		return this;
+	}
+	
+	public StatisticBean setBallControl(Integer ballControl) {
+		if(ballControl < 1 || ballControl > 100 || ballControl == null) {
+			this.ballControl = 50;
+		} else {
+			this.ballControl = ballControl.intValue();
+		}
+		return this;
+	}
+	
+	public StatisticBean setComposure(Integer composure) {
+		if(composure < 1 || composure > 100 || composure == null) {
+			this.composure = 50;
+		} else {
+			this.composure = composure.intValue();
+		}
+		return this;
+	}
+	
+	
 }
