@@ -1,9 +1,11 @@
 package com.claudiodimauro.thefootballwall.api.beans;
 
+import org.springframework.stereotype.Component;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-
+@Component
 @NoArgsConstructor
 @Getter
 public class StatisticBean {
@@ -213,5 +215,84 @@ public class StatisticBean {
 		return this;
 	}
 	
+	public StatisticBean setInterceptions(Integer interceptions) {
+		if(interceptions < 1 || interceptions > 100 || interceptions == null) {
+			this.interceptions = 50;
+		} else {
+			this.interceptions = interceptions.intValue();
+		}
+		return this;
+	}
 	
+	public StatisticBean setHeadingAccuracy(Integer headingAccuracy) {
+		if(headingAccuracy < 1 || headingAccuracy > 100 || headingAccuracy == null) {
+			this.headingAccuracy = 50;
+		} else {
+			this.headingAccuracy = headingAccuracy.intValue();
+		}
+		return this;
+	}
+	
+	public StatisticBean setMarking(Integer marking) {
+		if(marking < 1 || marking > 100 || marking == null) {
+			this.marking = 50;
+		} else {
+			this.marking = marking.intValue();
+		}
+		return this;
+	}
+	
+	public StatisticBean setStandingTackle(Integer standingTackle) {
+		if(standingTackle < 1 || standingTackle > 100 || standingTackle == null) {
+			this.standingTackle = 50;
+		} else {
+			this.standingTackle = standingTackle.intValue();
+		}
+		return this;
+	}
+	
+	public StatisticBean setSlidingTackle(Integer slidingTackle) {
+		if(slidingTackle < 1 || slidingTackle > 100 || slidingTackle == null) {
+			this.slidingTackle = 50;
+		} else {
+			this.slidingTackle = slidingTackle.intValue();
+		}
+		return this;
+	}
+	
+	public StatisticBean setJumping(Integer jumping) {
+		if(jumping < 1 || jumping > 100 || jumping == null) {
+			this.jumping = 50;
+		} else {
+			this.jumping = jumping.intValue();
+		}
+		return this;
+	}
+	
+	public StatisticBean setStamina(Integer stamina) {
+		if(stamina < 1 || stamina > 100 || stamina == null) {
+			this.stamina = 50;
+		} else {
+			this.stamina = stamina.intValue();
+		}
+		return this;
+	}
+	
+	public StatisticBean setStrength(Integer strength) {
+		if(strength < 1 || strength > 100 || strength == null) {
+			this.strength = 50;
+		} else {
+			this.strength = strength.intValue();
+		}
+		return this;
+	}
+	
+	public StatisticBean setAggression(Integer aggression) {
+		if(aggression < 1 || aggression > 100 || aggression == null) {
+			this.aggression = 50;
+		} else {
+			this.aggression = aggression.intValue();
+		}
+		return this;
+	}
 }
