@@ -2,6 +2,7 @@ package com.claudiodimauro.thefootballwall.utils.responses;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 import org.springframework.http.HttpStatus;
 
@@ -18,7 +19,7 @@ public class GenericResponse<T> implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private T result;
-	private LocalDateTime requestTimestamp;
+	private Date timestamp;
 	private String path; //es "http://<endpoint>/<api>"
 	private String method; //es GET
 	private HttpStatus httpStatus;

@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -13,4 +14,5 @@ public class PlayerRequestBean {
 	private String playerName;
 	private String playerSurname;
 	private String playerId;
+
 }

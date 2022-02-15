@@ -1,11 +1,8 @@
 package com.claudiodimauro.thefootballwall.api.beans;
 
-import org.springframework.stereotype.Component;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Component
 @NoArgsConstructor
 @Getter
 public class StatisticBean {

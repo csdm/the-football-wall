@@ -12,7 +12,8 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class PlayerResponseBean {
-	private PlayerRequestBean request;
+	private PlayerRequestBean requestKey;
 	private String status;
+	private int retrievedItems;
 	private List<Player> list;
 }

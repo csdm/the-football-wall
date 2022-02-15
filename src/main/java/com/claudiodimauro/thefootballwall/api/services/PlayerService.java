@@ -29,12 +29,68 @@ public class PlayerService {
 		
 		if(list.isEmpty()) {
 			return new PlayerResponseBean(new PlayerRequestBean(),
-					Constants.Flag.NO_PLAYERS_FOUND, list); 
+					Constants.Flag.NO_PLAYERS_FOUND, 0, list); 
 		} else {
 			return new PlayerResponseBean(new PlayerRequestBean(),
-							Constants.Flag.OK, list);
+							Constants.Flag.OK, list.size(), list);
 		}
 	}
+	
+	public PlayerResponseBean findPlayerByName(String name) {
+		
+		List<Player> list = repository.findByName(name);
+		
+		PlayerRequestBean request = new PlayerRequestBean();
+		request.setPlayerName(name);
+		
+		
+		if(list.isEmpty()) {
+			
+			return new PlayerResponseBean(request,
+					Constants.Flag.NO_PLAYERS_FOUND, 0, list); 
+		} else {
+			
+			for (Player player : list) {
+				System.out.println("\n\n********FAKE_LOG********\n"
+						+ "Printed player: \n"
+						+ player.getName() + " " + player.getSurname()
+						+ "\n*********END_LOG*********\n\n");
+			}
+			return new PlayerResponseBean(request,
+							Constants.Flag.OK, list.size(), list);
+		}
+	}
+	
+	//versione con mongoTemplate
+//	public PlayerResponseBean findPlayerByName(String name) {
+//		Query query = new Query();
+//		query.addCriteria(Criteria.where("name").is(name));
+//		
+//		List<Player> list = template.find(query, Player.class);
+//		
+//		PlayerRequestBean request = new PlayerRequestBean();
+//		request.setPlayerName(name);
+//		
+//		
+//		if(list.isEmpty()) {
+//			
+//			return new PlayerResponseBean(request,
+//					Constants.Flag.NO_PLAYERS_FOUND, 0, list); 
+//		} else {
+//			
+//			for (Player player : list) {
+//				System.out.println("\n\n********FAKE_LOG********\n"
+//						+ "Printed List: \n"
+//						+ player.getName() + " " + player.getSurname()
+//						+ "\n*********END_LOG*********\n\n");
+//			}
+//			
+//			return new PlayerResponseBean(request,
+//							Constants.Flag.OK, list.size(), list);
+//		}	
+//		
+//		
+//	}
 	
 //	public List<Player> findByName(String name) {
 ////		Query query = new Query();
@@ -49,7 +105,4 @@ public class PlayerService {
 //			.orElse(null);
 //	}
 	
-	
-	
-	Query query = new Query();
 }
