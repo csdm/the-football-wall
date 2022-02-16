@@ -11,6 +11,8 @@ public interface Constants {
 	public interface RestParam {
 		  String P_NAME = "name";
 		  String P_SURNAME = "surname";
+		  String P_AGE = "age";
+		  String P_NATIONALITY = "nationality";
 		  String P_ID = "id";
 		  String P_TOTAL_SCORE = "totalScore";
 		  String P_SKILLS = "skills";

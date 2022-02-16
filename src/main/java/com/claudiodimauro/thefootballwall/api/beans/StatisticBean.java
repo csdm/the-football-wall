@@ -42,7 +42,7 @@ public class StatisticBean {
 	 *	The value could be null because this class is growed up using the builder pattern. 
 	 */
 	public StatisticBean setAcceleration(Integer acceleration) {
-		if(acceleration < 1 || acceleration > 100 || acceleration == null) {
+		if(acceleration == null || acceleration > 100 || acceleration < 1) {
 			this.acceleration = 50;
 		} else {
 			this.acceleration = acceleration.intValue();
@@ -51,7 +51,7 @@ public class StatisticBean {
 	}
 	
 	public StatisticBean setSprintSpeed(Integer sprintSpeed) {
-		if(sprintSpeed < 1 || sprintSpeed > 100 || sprintSpeed == null) {
+		if(sprintSpeed == null || sprintSpeed > 100 || sprintSpeed < 1) {
 			this.sprintSpeed = 50;
 		} else {
 			this.sprintSpeed = sprintSpeed.intValue();
@@ -60,7 +60,7 @@ public class StatisticBean {
 	}
 	
 	public StatisticBean setPositioning(Integer positioning) {
-		if(positioning < 1 || positioning > 100 || positioning == null) {
+		if(positioning == null || positioning > 100 || positioning < 1) {
 			this.positioning = 50;
 		} else {
 			this.positioning = positioning.intValue();
@@ -69,7 +69,7 @@ public class StatisticBean {
 	}
 	
 	public StatisticBean setFinishing(Integer finishing) {
-		if(finishing < 1 || finishing > 100 || finishing == null) {
+		if(finishing == null || finishing > 100 || finishing < 1) {
 			this.finishing = 50;
 		} else {
 			this.finishing = finishing.intValue();
@@ -78,7 +78,7 @@ public class StatisticBean {
 	}
 	
 	public StatisticBean setShotPower(Integer shotPower) {
-		if(shotPower < 1 || shotPower > 100 || shotPower == null) {
+		if(shotPower == null || shotPower > 100 || shotPower < 1) {
 			this.shotPower = 50;
 		} else {
 			this.shotPower = shotPower.intValue();
@@ -87,7 +87,7 @@ public class StatisticBean {
 	}
 	
 	public StatisticBean setLongShots(Integer longShots) {
-		if(longShots < 1 || longShots > 100 || longShots == null) {
+		if(longShots == null || longShots > 100 || longShots < 1) {
 			this.longShots = 50;
 		} else {
 			this.longShots = longShots.intValue();
@@ -96,7 +96,7 @@ public class StatisticBean {
 	}
 	
 	public StatisticBean setVolleys(Integer volleys) {
-		if(volleys < 1 || volleys > 100 || volleys == null) {
+		if(volleys == null || volleys > 100 || volleys < 1) {
 			this.volleys = 50;
 		} else {
 			this.volleys = volleys.intValue();
@@ -105,7 +105,7 @@ public class StatisticBean {
 	}
 	
 	public StatisticBean setPenalties(Integer penalties) {
-		if(penalties < 1 || penalties > 100 || penalties == null) {
+		if(penalties == null || penalties > 100 || penalties < 1) {
 			this.penalties = 50;
 		} else {
 			this.penalties = penalties.intValue();
@@ -114,7 +114,7 @@ public class StatisticBean {
 	}
 	
 	public StatisticBean setVision(Integer vision) {
-		if(vision < 1 || vision > 100 || vision == null) {
+		if(vision == null || vision > 100 || vision < 1) {
 			this.vision = 50;
 		} else {
 			this.vision = vision.intValue();
@@ -123,7 +123,7 @@ public class StatisticBean {
 	}
 	
 	public StatisticBean setCrossing(Integer crossing) {
-		if(crossing < 1 || crossing > 100 || crossing == null) {
+		if(crossing == null || crossing > 100 || crossing < 1) {
 			this.crossing = 50;
 		} else {
 			this.crossing = crossing.intValue();
@@ -132,7 +132,7 @@ public class StatisticBean {
 	}
 	
 	public StatisticBean setFreeKickAccuracy(Integer freeKickAccuracy) {
-		if(freeKickAccuracy < 1 || freeKickAccuracy > 100 || freeKickAccuracy == null) {
+		if(freeKickAccuracy == null || freeKickAccuracy > 100 || freeKickAccuracy < 1) {
 			this.freeKickAccuracy = 50;
 		} else {
 			this.freeKickAccuracy = freeKickAccuracy.intValue();
@@ -141,7 +141,7 @@ public class StatisticBean {
 	}
 	
 	public StatisticBean setShortPassing(Integer shortPassing) {
-		if(shortPassing < 1 || shortPassing > 100 || shortPassing == null) {
+		if(shortPassing == null || shortPassing > 100 || shortPassing < 1) {
 			this.shortPassing = 50;
 		} else {
 			this.shortPassing = shortPassing.intValue();
@@ -150,7 +150,7 @@ public class StatisticBean {
 	}
 	
 	public StatisticBean setLongPassing(Integer longPassing) {
-		if(longPassing < 1 || longPassing > 100 || longPassing == null) {
+		if(longPassing == null || longPassing > 100 || longPassing < 1) {
 			this.longPassing = 50;
 		} else {
 			this.longPassing = longPassing.intValue();
@@ -159,7 +159,7 @@ public class StatisticBean {
 	}
 	
 	public StatisticBean setCurve(Integer curve) {
-		if(curve < 1 || curve > 100 || curve == null) {
+		if(curve == null || curve > 100 || curve < 1) {
 			this.curve = 50;
 		} else {
 			this.curve = curve.intValue();
@@ -168,7 +168,7 @@ public class StatisticBean {
 	}
 	
 	public StatisticBean setAgility(Integer agility) {
-		if(agility < 1 || agility > 100 || agility == null) {
+		if(agility == null || agility > 100 || agility < 1) {
 			this.agility = 50;
 		} else {
 			this.agility = agility.intValue();
@@ -177,7 +177,7 @@ public class StatisticBean {
 	}
 	
 	public StatisticBean setBalance(Integer balance) {
-		if(balance < 1 || balance > 100 || balance == null) {
+		if(balance == null || balance > 100 || balance < 1) {
 			this.agility = 50;
 		} else {
 			this.agility = balance.intValue();
@@ -186,7 +186,7 @@ public class StatisticBean {
 	}
 	
 	public StatisticBean setReactions(Integer reactions) {
-		if(reactions < 1 || reactions > 100 || reactions == null) {
+		if(reactions == null || reactions > 100 || reactions < 1) {
 			this.reactions = 50;
 		} else {
 			this.reactions = reactions.intValue();
@@ -195,7 +195,7 @@ public class StatisticBean {
 	}
 	
 	public StatisticBean setBallControl(Integer ballControl) {
-		if(ballControl < 1 || ballControl > 100 || ballControl == null) {
+		if(ballControl == null || ballControl > 100 || ballControl < 1) {
 			this.ballControl = 50;
 		} else {
 			this.ballControl = ballControl.intValue();
@@ -203,8 +203,17 @@ public class StatisticBean {
 		return this;
 	}
 	
+	public StatisticBean setDribbling(Integer dribbling) {
+		if(dribbling == null || dribbling > 100 || dribbling < 1) {
+			this.dribbling = 50;
+		} else {
+			this.dribbling = dribbling.intValue();
+		}
+		return this;
+	}
+	
 	public StatisticBean setComposure(Integer composure) {
-		if(composure < 1 || composure > 100 || composure == null) {
+		if(composure == null || composure > 100 || composure < 1) {
 			this.composure = 50;
 		} else {
 			this.composure = composure.intValue();
@@ -213,7 +222,7 @@ public class StatisticBean {
 	}
 	
 	public StatisticBean setInterceptions(Integer interceptions) {
-		if(interceptions < 1 || interceptions > 100 || interceptions == null) {
+		if(interceptions == null || interceptions > 100 || interceptions < 1) {
 			this.interceptions = 50;
 		} else {
 			this.interceptions = interceptions.intValue();
@@ -222,7 +231,7 @@ public class StatisticBean {
 	}
 	
 	public StatisticBean setHeadingAccuracy(Integer headingAccuracy) {
-		if(headingAccuracy < 1 || headingAccuracy > 100 || headingAccuracy == null) {
+		if(headingAccuracy == null || headingAccuracy > 100 || headingAccuracy < 1) {
 			this.headingAccuracy = 50;
 		} else {
 			this.headingAccuracy = headingAccuracy.intValue();
@@ -231,7 +240,7 @@ public class StatisticBean {
 	}
 	
 	public StatisticBean setMarking(Integer marking) {
-		if(marking < 1 || marking > 100 || marking == null) {
+		if(marking == null || marking > 100 || marking < 1) {
 			this.marking = 50;
 		} else {
 			this.marking = marking.intValue();
@@ -240,7 +249,7 @@ public class StatisticBean {
 	}
 	
 	public StatisticBean setStandingTackle(Integer standingTackle) {
-		if(standingTackle < 1 || standingTackle > 100 || standingTackle == null) {
+		if(standingTackle == null || standingTackle > 100 || standingTackle < 1) {
 			this.standingTackle = 50;
 		} else {
 			this.standingTackle = standingTackle.intValue();
@@ -249,7 +258,7 @@ public class StatisticBean {
 	}
 	
 	public StatisticBean setSlidingTackle(Integer slidingTackle) {
-		if(slidingTackle < 1 || slidingTackle > 100 || slidingTackle == null) {
+		if(slidingTackle == null || slidingTackle > 100 || slidingTackle < 1) {
 			this.slidingTackle = 50;
 		} else {
 			this.slidingTackle = slidingTackle.intValue();
@@ -258,7 +267,7 @@ public class StatisticBean {
 	}
 	
 	public StatisticBean setJumping(Integer jumping) {
-		if(jumping < 1 || jumping > 100 || jumping == null) {
+		if(jumping == null || jumping > 100 || jumping < 1) {
 			this.jumping = 50;
 		} else {
 			this.jumping = jumping.intValue();
@@ -267,7 +276,7 @@ public class StatisticBean {
 	}
 	
 	public StatisticBean setStamina(Integer stamina) {
-		if(stamina < 1 || stamina > 100 || stamina == null) {
+		if(stamina == null || stamina > 100 || stamina < 1) {
 			this.stamina = 50;
 		} else {
 			this.stamina = stamina.intValue();
@@ -276,7 +285,7 @@ public class StatisticBean {
 	}
 	
 	public StatisticBean setStrength(Integer strength) {
-		if(strength < 1 || strength > 100 || strength == null) {
+		if(strength == null || strength > 100 || strength < 1) {
 			this.strength = 50;
 		} else {
 			this.strength = strength.intValue();
@@ -285,7 +294,7 @@ public class StatisticBean {
 	}
 	
 	public StatisticBean setAggression(Integer aggression) {
-		if(aggression < 1 || aggression > 100 || aggression == null) {
+		if(aggression == null || aggression > 100 || aggression < 1) {
 			this.aggression = 50;
 		} else {
 			this.aggression = aggression.intValue();

@@ -3,6 +3,7 @@ package com.claudiodimauro.thefootballwall.api.services;
 import java.util.List;
 import java.util.Optional;
 
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -12,9 +13,13 @@ import org.springframework.stereotype.Service;
 
 import com.claudiodimauro.thefootballwall.api.beans.PlayerRequestBean;
 import com.claudiodimauro.thefootballwall.api.beans.PlayerResponseBean;
+import com.claudiodimauro.thefootballwall.api.beans.SkillBean;
+import com.claudiodimauro.thefootballwall.api.beans.StatisticBean;
 import com.claudiodimauro.thefootballwall.api.models.Player;
 import com.claudiodimauro.thefootballwall.api.repositories.PlayerRepository;
 import com.claudiodimauro.thefootballwall.utils.Constants;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 @Service
 public class PlayerService {
@@ -104,5 +109,21 @@ public class PlayerService {
 //				.findByName(name)
 //			.orElse(null);
 //	}
+	
+
+	/**
+	 * It must return a response
+	 * @param player
+	 */
+	public void addPlayer(Player player) {
+		
+		if(player == null) {
+			//add response error
+		} else {
+
+			repository.insert(player);
+			
+		}
+	}
 	
 }
