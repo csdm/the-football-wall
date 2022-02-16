@@ -1,28 +1,25 @@
 package com.claudiodimauro.thefootballwall.api.services;
 
 import java.util.List;
-import java.util.Optional;
 
-import org.bson.types.ObjectId;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.CriteriaDefinition;
-import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
 import com.claudiodimauro.thefootballwall.api.beans.PlayerRequestBean;
 import com.claudiodimauro.thefootballwall.api.beans.PlayerResponseBean;
-import com.claudiodimauro.thefootballwall.api.beans.SkillBean;
-import com.claudiodimauro.thefootballwall.api.beans.StatisticBean;
+import com.claudiodimauro.thefootballwall.api.beans.PlayerResponseOnInsertBean;
 import com.claudiodimauro.thefootballwall.api.models.Player;
 import com.claudiodimauro.thefootballwall.api.repositories.PlayerRepository;
 import com.claudiodimauro.thefootballwall.utils.Constants;
 
-import io.swagger.v3.oas.annotations.media.Schema;
 
 @Service
 public class PlayerService {
+	private static final Logger logger = LoggerFactory.getLogger(PlayerService.class);
+	
 	@Autowired
 	PlayerRepository repository;
 	
@@ -30,9 +27,12 @@ public class PlayerService {
 	MongoTemplate template;
 	
 	public PlayerResponseBean findAllPlayers() {
+		
+		
 		List<Player> list = repository.findAll();
 		
 		if(list.isEmpty()) {
+			logger.debug("*** NO PLAYERS FOUND ***");
 			return new PlayerResponseBean(new PlayerRequestBean(),
 					Constants.Flag.NO_PLAYERS_FOUND, 0, list); 
 		} else {
@@ -41,26 +41,19 @@ public class PlayerService {
 		}
 	}
 	
-	public PlayerResponseBean findPlayerByName(String name) {
+	public PlayerResponseBean findPlayerBySurname(String surname) {
 		
-		List<Player> list = repository.findByName(name);
+		List<Player> list = repository.findBySurname(surname);
 		
 		PlayerRequestBean request = new PlayerRequestBean();
-		request.setPlayerName(name);
+		request.setPlayerSurname(surname);
 		
 		
 		if(list.isEmpty()) {
-			
+			logger.debug("NO PLAYERS FOUND");
 			return new PlayerResponseBean(request,
 					Constants.Flag.NO_PLAYERS_FOUND, 0, list); 
-		} else {
-			
-			for (Player player : list) {
-				System.out.println("\n\n********FAKE_LOG********\n"
-						+ "Printed player: \n"
-						+ player.getName() + " " + player.getSurname()
-						+ "\n*********END_LOG*********\n\n");
-			}
+		} else {			
 			return new PlayerResponseBean(request,
 							Constants.Flag.OK, list.size(), list);
 		}
@@ -110,19 +103,13 @@ public class PlayerService {
 //			.orElse(null);
 //	}
 	
-
-	/**
-	 * It must return a response
-	 * @param player
-	 */
-	public void addPlayer(Player player) {
-		
-		if(player == null) {
-			//add response error
-		} else {
-
+	
+	public PlayerResponseOnInsertBean addPlayer(Player player) {
+		try {
 			repository.insert(player);
-			
+			return new PlayerResponseOnInsertBean(player, Constants.Flag.OK);
+		} catch(Exception ex) {
+			return new PlayerResponseOnInsertBean(player, Constants.Flag.KO + " " + ex.getMessage());
 		}
 	}
 	

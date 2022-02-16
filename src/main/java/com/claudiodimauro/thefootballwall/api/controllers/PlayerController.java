@@ -2,6 +2,8 @@ package com.claudiodimauro.thefootballwall.api.controllers;
 
 import java.util.Date;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.claudiodimauro.thefootballwall.api.beans.PlayerResponseBean;
+import com.claudiodimauro.thefootballwall.api.beans.PlayerResponseOnInsertBean;
 import com.claudiodimauro.thefootballwall.api.beans.SkillBean;
 import com.claudiodimauro.thefootballwall.api.beans.StatisticBean;
 import com.claudiodimauro.thefootballwall.api.models.Player;
@@ -31,6 +34,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 @RestController
 @RequestMapping(value = "/api")
 public class PlayerController {
+	private static final Logger logger = LoggerFactory.getLogger(PlayerController.class);
+	
 	@Autowired
 	private PlayerService service;
 
@@ -61,7 +66,7 @@ public class PlayerController {
 
 	@GetMapping(path = "/getPlayer")
 	@Operation(method = "GET", 
-			   summary = "Get a list of the specified football player and his skills", 
+			   summary = "Get data about the specified football player and his skills", 
 			   description = "It returns the data about a football player and their skills")
 	@ApiResponses(value = { 
 			@ApiResponse(responseCode = "200", description = "OK"),
@@ -69,8 +74,8 @@ public class PlayerController {
 			@ApiResponse(responseCode = "500", description = "Internal Server Error") 
 	})
 	public @ResponseBody ResponseEntity<?> getPlayer(
-			@RequestParam(value=Constants.RestParam.P_NAME, required=true) String name,
-			@RequestParam(value=Constants.RestParam.P_SURNAME, required=false) String surname,
+			@RequestParam(value=Constants.RestParam.P_NAME, required=false) String name,
+			@RequestParam(value=Constants.RestParam.P_SURNAME, required=true) String surname,
 			@RequestParam(value=Constants.RestParam.P_ID, required=false) String id
 			) {
 
@@ -79,15 +84,20 @@ public class PlayerController {
 
 
 		try {
-			PlayerResponseBean response = service.findPlayerByName(name);
+			PlayerResponseBean response = service.findPlayerBySurname(surname);
 			output = new GenericResponse<PlayerResponseBean>(response, httpStatus.toString(), ElaborationStatus.ELABORATO);
 			output.setHttpStatus(HttpStatus.OK);
 			output.setTimestamp(new Date()); //setto la data della richiesta
 			output.setPath("api/getPlayer");
 			output.setMethod(HttpMethod.GET.toString());
 		} catch (Exception ex) {
+			logger.error("ERROR {}", HttpStatus.INTERNAL_SERVER_ERROR.toString());
 			httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
-			output = new GenericResponse<PlayerResponseBean>(null, "ERRORE:" + ex.getMessage(), ElaborationStatus.ERRORE);
+			output = new GenericResponse<PlayerResponseBean>(null, "ERROR: " + ex.getMessage(), ElaborationStatus.ERRORE);
+			output.setHttpStatus(httpStatus);
+			output.setTimestamp(new Date()); //setto la data della richiesta
+			output.setPath("api/getPlayer");
+			output.setMethod(HttpMethod.GET.toString());
 		}
 
 		return ResponseEntity.status(httpStatus).body(output);
@@ -113,7 +123,8 @@ public class PlayerController {
 			@RequestParam(value="skillMoves | accepted values in [1,5]", required=false) Integer skillMoves,
 			@RequestParam(value="weakFoot | accepted values in [1,5]", required=false) Integer weakFoot,
 			@RequestParam(value="attWorkRate", required=false) WorkRate attWorkRate,
-			@RequestParam(value="skillMoves", required=false) FootPreference preferredFoot,
+			@RequestParam(value="defWorkRate", required=false) WorkRate defWorkRate,
+			@RequestParam(value="preferredFoot", required=false) FootPreference preferredFoot,
 			
 			//StatisticBean parameters
 			@RequestParam(value="acceleration | accepted values in [1,100]", required=false) Integer acceleration,
@@ -144,16 +155,16 @@ public class PlayerController {
 			@RequestParam(value="jumping | accepted values in [1,100]", required=false) Integer jumping,
 			@RequestParam(value="stamina | accepted values in [1,100]", required=false) Integer stamina,
 			@RequestParam(value="accestrengthleration | accepted values in [1,100]", required=false) Integer strength,
-			@RequestParam(value="accelaggressioneration | accepted values in [1,100]", required=false) Integer aggression,
-			@RequestParam(value="test", required=false) WorkRate test
+			@RequestParam(value="accelaggressioneration | accepted values in [1,100]", required=false) Integer aggression
 			) { 
 		
 
 		
-		SkillBean skills = new SkillBean().setSkillMoves(null)
-										  .setWeakFoot(null)
-										  .setAttWorkRate(null)
-										  .setWeakFoot(null);
+		SkillBean skills = new SkillBean().setSkillMoves(skillMoves)
+										  .setWeakFoot(weakFoot)
+										  .setAttWorkRate(attWorkRate)
+										  .setDefWorkRate(defWorkRate)
+										  .setPreferredFoot(preferredFoot);
 		
 		StatisticBean statistics = new StatisticBean().setAcceleration(acceleration)
 													  .setSprintSpeed(sprintSpeed)
@@ -184,10 +195,24 @@ public class PlayerController {
 													  .setStamina(stamina)
 													  .setStrength(strength)
 													  .setAggression(aggression);
-
 		
 		Player player = new Player(name, surname, age, nationality, totalScore, skills, statistics);
-		service.addPlayer(player);
-		return null;
+		
+		GenericResponse<PlayerResponseOnInsertBean> output = null;
+		HttpStatus httpStatus = HttpStatus.OK;
+						
+		try {
+			PlayerResponseOnInsertBean response = service.addPlayer(player);
+			output = new GenericResponse<PlayerResponseOnInsertBean>(response, httpStatus.toString(), ElaborationStatus.ELABORATO);
+			output.setHttpStatus(HttpStatus.OK);
+			output.setTimestamp(new Date()); //setto la data della richiesta
+			output.setPath("api/addPlayer");
+			output.setMethod(HttpMethod.POST.toString());
+		} catch(Exception ex) {
+			httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
+			output = new GenericResponse<PlayerResponseOnInsertBean>(null, "ERROR: " + ex.getMessage(), ElaborationStatus.ERRORE);
+		}
+		
+		return ResponseEntity.status(httpStatus).body(output);
 	}
 }

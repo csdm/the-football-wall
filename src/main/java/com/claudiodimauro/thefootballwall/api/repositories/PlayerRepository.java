@@ -11,7 +11,7 @@ import com.claudiodimauro.thefootballwall.api.models.Player;
 @Repository
 public interface PlayerRepository extends MongoRepository<Player, String>{
 	
-	List<Player> findByName(String name);
+	List<Player> findBySurname(String surname);
 	
 //	public Optional<List<Player>> findByNameAndNumero(String name,int numero); //uso Optional perché non è detto che il metodo mi ritorni effettivamente qualcosa
 //

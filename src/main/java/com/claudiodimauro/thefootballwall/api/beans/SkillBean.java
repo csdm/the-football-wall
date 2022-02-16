@@ -14,6 +14,7 @@ public class SkillBean {
 	private int skillMoves;
 	private int weakFoot;
 	private WorkRate attWorkRate;
+	private WorkRate defWorkRate;
 	private FootPreference preferredFoot;	
 	
 	public SkillBean setSkillMoves(Integer skillMoves) {
@@ -36,6 +37,11 @@ public class SkillBean {
 	
 	public SkillBean setAttWorkRate(WorkRate attWorkRate) {
 		this.attWorkRate = attWorkRate;
+		return this;
+	}
+	
+	public SkillBean setDefWorkRate(WorkRate defWorkRate) {
+		this.defWorkRate = defWorkRate;
 		return this;
 	}
 	
