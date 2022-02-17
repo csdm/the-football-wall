@@ -1,0 +1,5 @@
+2022-02-17 12:24:10.468  [INFO] [com.claudiodimauro.thefootballwall.SpringReactTheFootballWallApplication]  **MSG: Starting SpringReactTheFootballWallApplication using Java 15.0.2 on VT-DIMAUROCS with PID 463128 (C:\Workspace\_github_personale\spring-react-the-football-wall\target\classes started by DiMauroCS in C:\Workspace\_github_personale\spring-react-the-football-wall)
+ 2022-02-17 12:24:10.483  [DEBUG] [com.claudiodimauro.thefootballwall.SpringReactTheFootballWallApplication]  **MSG: Running with Spring Boot v2.6.3, Spring v5.3.15
+ 2022-02-17 12:24:10.485  [INFO] [com.claudiodimauro.thefootballwall.SpringReactTheFootballWallApplication]  **MSG: No active profile set, falling back to default profiles: default
+ 2022-02-17 12:24:18.190  [INFO] [com.claudiodimauro.thefootballwall.SpringReactTheFootballWallApplication]  **MSG: Started SpringReactTheFootballWallApplication in 8.844 seconds (JVM running for 10.056)
+ 

@@ -44,6 +44,3 @@ local.properties
 
 ### VS Code ###
 .vscode/
-
-### Logs ###
-/Logs/
