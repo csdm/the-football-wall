@@ -1,0 +1,11 @@
+2022-02-17 11:41:42.886  [INFO] [com.claudiodimauro.thefootballwall.SpringReactTheFootballWallApplication]  **MSG: Starting SpringReactTheFootballWallApplication using Java 15.0.2 on VT-DIMAUROCS with PID 407856 (C:\Workspace\_github_personale\spring-react-the-football-wall\target\classes started by DiMauroCS in C:\Workspace\_github_personale\spring-react-the-football-wall)
+ 2022-02-17 11:41:42.896  [DEBUG] [com.claudiodimauro.thefootballwall.SpringReactTheFootballWallApplication]  **MSG: Running with Spring Boot v2.6.3, Spring v5.3.15
+ 2022-02-17 11:41:42.897  [INFO] [com.claudiodimauro.thefootballwall.SpringReactTheFootballWallApplication]  **MSG: No active profile set, falling back to default profiles: default
+ 2022-02-17 11:41:49.367  [INFO] [com.claudiodimauro.thefootballwall.SpringReactTheFootballWallApplication]  **MSG: Started SpringReactTheFootballWallApplication in 7.367 seconds (JVM running for 8.45)
+ 2022-02-17 11:45:49.893  [DEBUG] [com.claudiodimauro.thefootballwall.api.controllers.PlayerController]  **MSG: REST CALL - method: GET - path: api/getPlayer/all
+ 2022-02-17 11:45:50.464  [DEBUG] [com.claudiodimauro.thefootballwall.api.services.PlayerService]  **MSG: Search status: OK - Search results: found 4 player(s)
+ 2022-02-17 11:46:36.766  [DEBUG] [com.claudiodimauro.thefootballwall.api.controllers.PlayerController]  **MSG: REST CALL - method: GET - path: api/getPlayer - searchKey: null, we, null
+ 2022-02-17 11:46:36.829  [DEBUG] [com.claudiodimauro.thefootballwall.api.services.PlayerService]  **MSG: Search status: NO_PLAYER_FOUND - Search results: found 0 player(s)
+ 2022-02-17 11:47:32.363  [DEBUG] [com.claudiodimauro.thefootballwall.api.controllers.PlayerController]  **MSG: REST CALL - method: GET - path: api/getPlayer - searchKey: errrr, we, null
+ 2022-02-17 11:47:32.397  [DEBUG] [com.claudiodimauro.thefootballwall.api.services.PlayerService]  **MSG: Search status: NO_PLAYER_FOUND - Search results: found 0 player(s)
+ 
