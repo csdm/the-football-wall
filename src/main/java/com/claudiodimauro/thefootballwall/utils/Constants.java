@@ -5,7 +5,7 @@ public interface Constants {
 	public interface Flag {
 		String OK = "OK";
 		String KO = "KO";
-		String NO_PLAYERS_FOUND = "NO_PLAYERS_FOUND";
+		String NO_PLAYER_FOUND = "NO_PLAYER_FOUND";
 	}
 	
 	public interface RestParam {

@@ -49,6 +49,7 @@ public class PlayerController {
 			@ApiResponse(responseCode = "500", description = "Internal Server Error") 
 	})
 	public @ResponseBody ResponseEntity<?> getAllPlayers() {
+		logger.debug("REST CALL - method: {} - path: {}", HttpMethod.GET, "api/getPlayer/all");
 
 		GenericResponse<PlayerResponseBean> output = null;
 		HttpStatus httpStatus = HttpStatus.OK;
@@ -78,7 +79,8 @@ public class PlayerController {
 			@RequestParam(value=Constants.RestParam.P_SURNAME, required=true) String surname,
 			@RequestParam(value=Constants.RestParam.P_ID, required=false) String id
 			) {
-
+		logger.debug("REST CALL - method: {} - path: {} - searchKey: {}, {}, {}", HttpMethod.GET, "api/getPlayer", name, surname, id);
+		
 		GenericResponse<PlayerResponseBean> output = null;
 		HttpStatus httpStatus = HttpStatus.OK;
 
@@ -157,7 +159,7 @@ public class PlayerController {
 			@RequestParam(value="accestrengthleration | accepted values in [1,100]", required=false) Integer strength,
 			@RequestParam(value="accelaggressioneration | accepted values in [1,100]", required=false) Integer aggression
 			) { 
-		
+		logger.debug("REST CALL - method: {} - path: {} - request for: {}, {}", HttpMethod.POST, "api/addPlayer", surname, name);
 
 		
 		SkillBean skills = new SkillBean().setSkillMoves(skillMoves)

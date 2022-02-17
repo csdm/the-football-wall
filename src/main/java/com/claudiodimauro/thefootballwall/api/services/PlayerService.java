@@ -27,33 +27,32 @@ public class PlayerService {
 	MongoTemplate template;
 	
 	public PlayerResponseBean findAllPlayers() {
-		
-		
 		List<Player> list = repository.findAll();
 		
-		if(list.isEmpty()) {
-			logger.debug("*** NO PLAYERS FOUND ***");
+		if(list.isEmpty()) {			
+			logger.debug("Search status: {} - Search results: found {} player(s)", Constants.Flag.NO_PLAYER_FOUND, 0);
 			return new PlayerResponseBean(new PlayerRequestBean(),
-					Constants.Flag.NO_PLAYERS_FOUND, 0, list); 
+					Constants.Flag.NO_PLAYER_FOUND, 0, list);
 		} else {
+			logger.debug("Search status: {} - Search results: found {} player(s)", Constants.Flag.OK, list.size());
 			return new PlayerResponseBean(new PlayerRequestBean(),
 							Constants.Flag.OK, list.size(), list);
 		}
 	}
 	
-	public PlayerResponseBean findPlayerBySurname(String surname) {
-		
+	
+	public PlayerResponseBean findPlayerBySurname(String surname) {	
 		List<Player> list = repository.findBySurname(surname);
 		
 		PlayerRequestBean request = new PlayerRequestBean();
 		request.setPlayerSurname(surname);
 		
-		
 		if(list.isEmpty()) {
-			logger.debug("NO PLAYERS FOUND");
+			logger.debug("Search status: {} - Search results: found {} player(s)", Constants.Flag.NO_PLAYER_FOUND, 0);
 			return new PlayerResponseBean(request,
-					Constants.Flag.NO_PLAYERS_FOUND, 0, list); 
-		} else {			
+					Constants.Flag.NO_PLAYER_FOUND, 0, list); 
+		} else {		
+			logger.debug("Search status: {} - Search results: found {} player(s)", Constants.Flag.OK, list.size());
 			return new PlayerResponseBean(request,
 							Constants.Flag.OK, list.size(), list);
 		}
