@@ -48,3 +48,4 @@ local.properties
 ### Logs ###
 #Logs/
 *.log
+*.gz
