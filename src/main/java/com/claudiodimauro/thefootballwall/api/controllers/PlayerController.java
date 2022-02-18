@@ -178,7 +178,7 @@ public class PlayerController {
 													  .setPenalties(penalties)
 													  .setVision(vision)
 													  .setCrossing(crossing)
-													  .setShortPassing(freeKickAccuracy)
+													  .setFreeKickAccuracy(freeKickAccuracy)
 													  .setShortPassing(shortPassing)
 													  .setLongPassing(longPassing)
 													  .setCurve(curve)

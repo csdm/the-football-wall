@@ -178,9 +178,9 @@ public class StatisticBean {
 	
 	public StatisticBean setBalance(Integer balance) {
 		if(balance == null || balance > 100 || balance < 1) {
-			this.agility = 50;
+			this.balance = 50;
 		} else {
-			this.agility = balance.intValue();
+			this.balance = balance.intValue();
 		}
 		return this;
 	}
