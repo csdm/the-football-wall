@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,6 +40,7 @@ public class PlayerController {
 	@Autowired
 	private PlayerService service;
 
+	@CrossOrigin(origins = "http://localhost:3000")
 	@GetMapping(path = "/getPlayer/all")
 	@Operation(method = "GET", 
 			   summary = "Get a list of all football players and their skills", 
@@ -57,9 +59,17 @@ public class PlayerController {
 		try {
 			PlayerResponseBean response = service.findAllPlayers();
 			output = new GenericResponse<PlayerResponseBean>(response, httpStatus.toString(), ElaborationStatus.ELABORATO);
+			output.setHttpStatus(HttpStatus.OK);
+			output.setTimestamp(new Date()); //setto la data della richiesta
+			output.setPath("api/getPlayer/all");
+			output.setMethod(HttpMethod.GET.toString());
 		} catch (Exception ex) {
 			httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
 			output = new GenericResponse<PlayerResponseBean>(null, "ERRORE:" + ex.getMessage(), ElaborationStatus.ERRORE);
+			output.setHttpStatus(httpStatus);
+			output.setTimestamp(new Date()); //setto la data della richiesta
+			output.setPath("api/getPlayer/all");
+			output.setMethod(HttpMethod.GET.toString());
 		}
 
 		return ResponseEntity.status(httpStatus).body(output);
@@ -213,6 +223,10 @@ public class PlayerController {
 		} catch(Exception ex) {
 			httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
 			output = new GenericResponse<PlayerResponseOnInsertBean>(null, "ERROR: " + ex.getMessage(), ElaborationStatus.ERRORE);
+			output.setHttpStatus(httpStatus);
+			output.setTimestamp(new Date()); //setto la data della richiesta
+			output.setPath("api/addPlayer");
+			output.setMethod(HttpMethod.POST.toString());
 		}
 		
 		return ResponseEntity.status(httpStatus).body(output);
