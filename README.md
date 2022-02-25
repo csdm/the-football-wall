@@ -31,7 +31,9 @@ All information are "manually" inserted in the DB of this web app and not retrie
 Actually the software structure foresees the presence of a front-end that interfaces with the back-end through REST APIs.  
 The back-end exposes some functionality that communicate with MongoDB to make the CRUD operations and to do this are used the Mongo connectors.  
 In a near future I would like to include Kafka, <u>for purely educational purposes</u>, to try the communication between two microservices and the communication from front-end to DB will be done passing by two microservices in which only one of them has directly connection to Mongo.  
-![alt schema](./img/diagrammi_progetto.png)  
+<p align="center">
+  <img alt="schemas_as_is_to_be" src="./img/diagrammi_progetto.png" width="400" title="As Is-To Be">
+</p>
 As you can see in the schemas above, in the TO BE schema the only purpose of MS2 is to communicate with Mongo in writing mode and MS1 communicate with MS2 via Kafka and in reading mode with DB.  
 This could appear as a non-sense schema, but as I said before, Kafka will be used only for learning and this connection appears as a good way to make some tests.
 
