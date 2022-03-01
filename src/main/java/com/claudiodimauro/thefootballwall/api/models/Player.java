@@ -25,8 +25,10 @@ import lombok.Setter;
 public class Player {
 
 	@Id
-	@Schema(description = "Unique identifier of a football player")
+	@Schema(description = "Unique identifier of the stored document")
 	private ObjectId id;
+	@Schema(description = "Unique identifier of a football player")
+	private String playerId;
 	@Schema(description = "Name of a football player")
 	private String name;
 	@Schema(description = "Surname of a football player")
@@ -42,8 +44,9 @@ public class Player {
 	@Schema(description = "List of statistics about a player")
 	private StatisticBean statistics;
 		
-	public Player(String name, String surname, int age, String nationality, int totalScore, SkillBean skills, StatisticBean statistics) {
+	public Player(String playerId, String name, String surname, int age, String nationality, int totalScore, SkillBean skills, StatisticBean statistics) {
 		super();
+		this.playerId = playerId;
 		this.name = name;
 		this.surname = surname;
 		this.age = age;

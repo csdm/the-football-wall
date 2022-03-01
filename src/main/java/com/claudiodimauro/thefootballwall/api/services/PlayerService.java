@@ -1,11 +1,16 @@
 package com.claudiodimauro.thefootballwall.api.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Order;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
 import com.claudiodimauro.thefootballwall.api.beans.PlayerRequestBean;
@@ -54,6 +59,36 @@ public class PlayerService {
 		} else {		
 			logger.debug("Search status: {} - Search results: found {} player(s)", Constants.Flag.OK, list.size());
 			return new PlayerResponseBean(request,
+							Constants.Flag.OK, list.size(), list);
+		}
+	}
+	
+	public PlayerResponseBean findTopTenPlayers() {
+		Query query = new Query();
+		query.addCriteria(Criteria.where("totalScore").gte(90));
+		
+		/**
+		 * Query ordering
+		 */
+		Sort.Order order1 = new Order(Sort.Direction.DESC, "totalScore");
+		Sort.Order order2 = new Order(Sort.Direction.ASC, "surname");
+		List<Sort.Order> orders = new ArrayList<>();
+		orders.add(order1);
+		orders.add(order2);
+		/*****/
+		
+		query.with(Sort.by(orders));
+		query.limit(10);
+		
+		List<Player> list = template.find(query, Player.class);
+		
+		if(list.isEmpty()) {			
+			logger.debug("Search status: {} - Search results: found {} player(s) of 10 players", Constants.Flag.NO_PLAYER_FOUND, 0);
+			return new PlayerResponseBean(new PlayerRequestBean(),
+					Constants.Flag.NO_PLAYER_FOUND, 0, list);
+		} else {
+			logger.debug("Search status: {} - Search results: found {} player(s) of 10 players", Constants.Flag.OK, list.size());
+			return new PlayerResponseBean(new PlayerRequestBean(),
 							Constants.Flag.OK, list.size(), list);
 		}
 	}
