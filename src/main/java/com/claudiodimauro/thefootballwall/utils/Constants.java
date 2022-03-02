@@ -9,6 +9,7 @@ public interface Constants {
 	}
 	
 	public interface RestParam {
+		  String P_PLAYER_ID = "playerId";
 		  String P_NAME = "name";
 		  String P_SURNAME = "surname";
 		  String P_AGE = "age";

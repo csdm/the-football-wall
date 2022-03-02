@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -137,6 +138,45 @@ public class PlayerController {
 
 		try {
 			PlayerResponseBean response = service.findPlayerBySurname(surname);
+			output = new GenericResponse<PlayerResponseBean>(response, httpStatus.toString(), ElaborationStatus.ELABORATO);
+			output.setHttpStatus(HttpStatus.OK);
+			output.setTimestamp(new Date()); //setto la data della richiesta
+			output.setPath("api/getPlayer");
+			output.setMethod(HttpMethod.GET.toString());
+		} catch (Exception ex) {
+			logger.error("ERROR {}", HttpStatus.INTERNAL_SERVER_ERROR.toString());
+			httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
+			output = new GenericResponse<PlayerResponseBean>(null, "ERROR: " + ex.getMessage(), ElaborationStatus.ERRORE);
+			output.setHttpStatus(httpStatus);
+			output.setTimestamp(new Date()); //setto la data della richiesta
+			output.setPath("api/getPlayer");
+			output.setMethod(HttpMethod.GET.toString());
+		}
+
+		return ResponseEntity.status(httpStatus).body(output);
+	}
+	
+	@CrossOrigin(origins = "http://127.0.0.1:5500")
+	@GetMapping(path = "/getPlayer/{playerId}")
+	@Operation(method = "GET", 
+			   summary = "Get data about the specified football player and his skills", 
+			   description = "It returns the data about a football player and their skills")
+	@ApiResponses(value = { 
+			@ApiResponse(responseCode = "200", description = "OK"),
+			@ApiResponse(responseCode = "404", description = "Not Found"),
+			@ApiResponse(responseCode = "500", description = "Internal Server Error") 
+	})
+	public @ResponseBody ResponseEntity<?> getPlayer(
+			@PathVariable("playerId") String playerId
+			) {
+		logger.debug("REST CALL - method: {} - path: {} - searchKey: {}", HttpMethod.GET, "api/getPlayer", playerId);
+		
+		GenericResponse<PlayerResponseBean> output = null;
+		HttpStatus httpStatus = HttpStatus.OK;
+
+
+		try {
+			PlayerResponseBean response = service.findPlayerByPlayerId(playerId);
 			output = new GenericResponse<PlayerResponseBean>(response, httpStatus.toString(), ElaborationStatus.ELABORATO);
 			output.setHttpStatus(HttpStatus.OK);
 			output.setTimestamp(new Date()); //setto la data della richiesta

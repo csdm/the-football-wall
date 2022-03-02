@@ -45,6 +45,23 @@ public class PlayerService {
 		}
 	}
 	
+	public PlayerResponseBean findPlayerByPlayerId(String playerId) {	
+		List<Player> list = repository.findByPlayerId(playerId);
+		
+		PlayerRequestBean request = new PlayerRequestBean();
+		request.setPlayerId(playerId);
+		
+		if(list.isEmpty()) {
+			logger.debug("Search status: {} - Search results: no one player with id {}", Constants.Flag.NO_PLAYER_FOUND, playerId);
+			return new PlayerResponseBean(request,
+					Constants.Flag.NO_PLAYER_FOUND, 0, list); 
+		} else {		
+			logger.debug("Search status: {} - Search results: found {}", Constants.Flag.OK, playerId);
+			return new PlayerResponseBean(request,
+							Constants.Flag.OK, list.size(), list);
+		}
+	}
+	
 	
 	public PlayerResponseBean findPlayerBySurname(String surname) {	
 		List<Player> list = repository.findBySurname(surname);
