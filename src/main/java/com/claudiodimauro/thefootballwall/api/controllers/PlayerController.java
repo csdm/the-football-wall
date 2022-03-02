@@ -168,7 +168,9 @@ public class PlayerController {
 	public @ResponseBody ResponseEntity<?> addPlayer(@Valid @RequestBody RequestPostDTO request) { 
 		logger.debug("REST CALL - method: {} - path: {} - request for: {}, {}", HttpMethod.POST, "api/addPlayer", request.getSurname(), request.getName());
 		
-		Player player = new Player(request.getPlayerId(), request.getName(), request.getSurname(), request.getAge(), request.getNationality(), request.getTotalScore(), request.getSkills(), request.getStatistics());
+		Player player = new Player(request.getPlayerId(), request.getName(), request.getSurname(), 
+								   request.getAge(), request.getNationality(), request.getRole(), 
+								   request.getTotalScore(), request.getSkills(), request.getStatistics());
 		
 		GenericResponse<PlayerResponseOnInsertBean> output = null;
 		HttpStatus httpStatus = HttpStatus.OK;

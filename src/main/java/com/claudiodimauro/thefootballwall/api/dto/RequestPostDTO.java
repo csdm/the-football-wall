@@ -25,6 +25,8 @@ public class RequestPostDTO {
 	@NotNull
 	private String nationality;
 	@NotNull
+	private String role;
+	@NotNull
 	@Min(1)
 	@Max(100)
 	private int totalScore; //min 1 max 100

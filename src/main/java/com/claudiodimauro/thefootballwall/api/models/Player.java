@@ -37,6 +37,8 @@ public class Player {
 	private int age;
 	@Schema(description = "The nationality of a football player")
 	private String nationality;
+	@Schema(description = "The role of a football player")
+	private String role;
 	@Schema(description = "Total score: a value between 1 and 100", example = "95")
 	private int totalScore; //min 1 max 100
 	@Schema(description = "List of skills of a player")
@@ -44,13 +46,14 @@ public class Player {
 	@Schema(description = "List of statistics about a player")
 	private StatisticBean statistics;
 		
-	public Player(String playerId, String name, String surname, int age, String nationality, int totalScore, SkillBean skills, StatisticBean statistics) {
+	public Player(String playerId, String name, String surname, int age, String nationality, String role, int totalScore, SkillBean skills, StatisticBean statistics) {
 		super();
 		this.playerId = playerId;
 		this.name = name;
 		this.surname = surname;
 		this.age = age;
 		this.nationality = nationality;
+		this.role = role;
 		this.totalScore = totalScore;
 		this.skills = skills;
 		this.statistics = statistics;
