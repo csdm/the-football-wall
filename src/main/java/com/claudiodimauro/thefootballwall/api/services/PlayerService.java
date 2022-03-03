@@ -82,7 +82,7 @@ public class PlayerService {
 	
 	public PlayerResponseBean findTopTenPlayers() {
 		Query query = new Query();
-		query.addCriteria(Criteria.where("totalScore").gte(90));
+		query.addCriteria(Criteria.where("totalScore").gte(80));
 		
 		/**
 		 * Query ordering

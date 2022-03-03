@@ -1,0 +1,57 @@
+/*
+** CUSTOM CSS ABOVE BOOTSTRAP
+*/
+
+.title-wrapper {
+    margin-bottom: 30px;
+}
+
+.table-wrapper {
+    margin-top: 1%;
+    margin-left: 0.6%;
+    margin-right: 0.6%;
+}
+
+.custom-btn {
+    background-color: #005F73 !important; 
+    border-color: #005F73 !important;
+    color: #fff !important; 
+}
+
+.custom-btn:hover {
+    background-color: #0A9396 !important;
+    border-color: #0A9396 !important;
+    color: #fff !important;
+}
+
+legend {
+    color: #001219;
+    margin-top: 30px;
+	font-weight: bold;
+	padding: 5px 5px 3px 7px;
+	width: auto;
+}
+
+.darkbg{
+    background-color: #005F73;
+    border-radius: 5px;
+    border-color: yellow !important;
+    border: solid 3px;
+    color: #fff;
+}
+
+.lightbg{
+    background-color: #0A9396;
+    border-radius: 5px;
+    border-color: red !important;
+    border: dashed 3px;
+    color: #fff;
+}
+
+.contBg {
+    background-color: rgb(238, 165, 77) !important;
+}
+
+.removePadding {
+    padding-left: 0px !important;
+}
