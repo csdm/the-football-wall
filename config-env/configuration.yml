@@ -1,0 +1,8 @@
+configuration:
+  env:
+    - name: DB_HOST
+    - value: "cluster0.fnaan.mongodb.net/TheFootballWall?retryWrites=true&w=majority"
+    - name: DB_USER
+    - value: "havana9"
+    - name: DB_PWD
+    - value: "PwdCdmCluster01"

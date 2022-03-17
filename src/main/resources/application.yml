@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: "The Football Wall"    
+  profiles:    active:    - prod
+    
+springdoc:  api-docs:    enabled: true  swagger-ui:    enabled: true    path: /try-api.html
+    
+logging:  file:    name: ./Logs/tfw-BE.log  logback:    rollingpolicy:      max-file-size: 1MB  pattern:    file: "%d{yyyy-MM-dd HH:mm:ss.SSS}  [%-1level] [%logger{100}]  **MSG: %msg%n"
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS}  [%-1level] [%logger{100}]  **MSG: %msg%n"

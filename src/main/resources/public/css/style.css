@@ -1,0 +1,155 @@
+/*
+** CUSTOM CSS ABOVE BOOTSTRAP
+*/
+
+.title-wrapper {
+    margin-bottom: 30px;
+}
+
+.table-wrapper {
+    margin-top: 1%;
+    margin-left: 0.6%;
+    margin-right: 0.6%;
+}
+
+.custom-btn {
+    background-color: #005F73 !important;
+    border-color: #005F73 !important;
+    color: #fff !important; 
+}
+
+.custom-btn-lightBorder {
+    border-color: #0A9396 !important;
+}
+
+.custom-btn:hover, .custom-btn-active {
+    background-color: #0A9396 !important;
+    border-color: #0A9396 !important;
+    color: #fff !important;
+}
+
+
+.custom-btn-search {
+    background-color: #94D2BD !important;
+    border-color: #94D2BD !important;
+    color: #001219 !important;
+}
+
+.custom-btn-search:hover {
+    background-color: #0A9396 !important;
+    border-color: #0A9396 !important;
+    color: #fff !important;
+}
+
+legend {
+    color: #001219;
+    margin-top: 30px;
+	font-weight: bold;
+	padding: 5px 5px 3px 7px;
+	width: auto;
+}
+
+.zoom-row {
+    background-color: transparent !important;
+    transition: transform .2s; /* Animation */
+    
+  }
+  
+.zoom-row:hover {
+    transform: scale(1.05);
+}
+
+.freeze-row {
+    top: 0;
+    position: sticky;
+    z-index: 20;
+    background-color: #fff;
+}
+
+.testSpinnerold {
+
+    
+    display: none;
+    position: absolute;
+    top:  50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 45%;
+    height: 45%;
+    vertical-align: center;
+    z-index: 100;
+
+    animation-name: spinning;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    /* linear | ease | ease-in | ease-out | ease-in-out */
+    animation-timing-function: ease-in-out;
+    
+}
+
+@keyframes spinning {
+    
+    from {
+        transform: rotate(0deg);
+        
+    }
+    to {
+        transform: rotate(360deg);
+        
+    }
+  }
+
+  .spinner{
+    display: none;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    z-index: 100;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 5px solid rgba(10, 147, 150, 0.3);
+    border-left-color: #005F73;
+    background: transparent;
+    animation: rotate-s-loader 1s linear infinite;
+    margin: 6rem auto;
+  }
+  
+  @keyframes rotate-s-loader {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+
+
+/********************************************/
+/********************************************/
+/********************************************/
+/******************ELIMINARE*****************/
+.darkbg{
+    background-color: #005F73;
+    border-radius: 5px;
+    border-color: yellow !important;
+    border: solid 3px;
+    color: #fff;
+}
+
+.lightbg{
+    background-color: #0A9396;
+    border-radius: 5px;
+    border-color: red !important;
+    border: dashed 3px;
+    color: #fff;
+}
+
+.contBg {
+    background-color: rgb(238, 165, 77) !important;
+}
+
+.removePadding {
+    padding-left: 0px !important;
+}

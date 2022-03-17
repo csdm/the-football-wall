@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: "The Football Wall"    
+  data:
+    mongodb:
+      uri: mongodb+srv://${MONGODB_USER}:${MONGODB_PASSWORD}@${MONGODB_SRV}
+      
+logging:
+  level:
+    root: WARN
+    '[org.springframework]': INFO
+    '[com.claudiodimauro]': INFO            

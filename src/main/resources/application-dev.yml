@@ -1,0 +1,16 @@
+spring:    
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: TheFootballWall
+
+server:
+  port: 8080
+  
+logging:
+  level:
+    root: WARN
+    '[org.springframework]': WARN
+    '[org.springframework.boot.web.embedded.tomcat.TomcatWebServer]': INFO
+    '[com.claudiodimauro]': DEBUG
