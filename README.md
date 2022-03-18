@@ -21,6 +21,9 @@ The Football Wall is a full-stack project I made to learn or better understand s
         * ReactJS (**to be**)
         * Axios
   
+  <br>
+  <strong><a href="https://thefootballwall.herokuapp.com/" target="_blank"><button>Watch online!</button></a></strong>
+
 <hr style="height:3px; border:none; color:rgb(60,90,180); background-color:rgb(60,90,180);">
 
 ## Table of contents <!-- omit in toc -->
@@ -31,6 +34,9 @@ The Football Wall is a full-stack project I made to learn or better understand s
     - [Example of log search](#example-of-log-search)
 - [Front-end](#front-end)
   - [The FE structure](#the-fe-structure)
+- [The environment](#the-environment)
+  - [Development Environment](#development-environment)
+  - [Production Environment](#production-environment)
 
 <hr style="height:3px; border:none; color:rgb(60,90,180); background-color:rgba(60,90,180,0.1);">
 
@@ -50,16 +56,22 @@ In a near future I would like to include Kafka, <u>for purely educational purpos
 As you can see in the schemas above, in the TO BE schema the only purpose of MS2 is to communicate with Mongo in writing mode and MS1 communicate with MS2 via Kafka and in reading mode with DB.  
 This could appear as a non-sense schema, but as I said before, Kafka will be used only for learning and this connection appears as a good way to make some tests.
 
+<hr style="height:3px; border:none; color:rgb(60,90,180); background-color:rgba(60,90,180,0.1);">
+
 ## Back-end
 ### APIs
 As already mentioned in the previous paragraph, the information relating to a player is kept within a MongoDB database and is accessed, entered or manipulated through REST APIs.  
 
 Method  | API Path             | Description
 ------- | ---------------------| -------------------------
-GET     | `/api/getPlayer/all` | Get a list of all football players and their skills
-GET     | `/api/getPlayer`     | Get data about the spcified football player and his skills
-POST    | `/api/addPlayer`     | Add new player
+GET     | `/api/getplayer/all` | Get a list of all football players and their skills
+GET     | `/api/getplayer/all/paginated` | Get a paginated list of all football players and their skills 
+GET     | `/getplayer/topten`  | Get the list of first ten players, ordered by total score
+GET     | `/api/getplayer`     | Get data about the spcified football player and his skills. The usable parameters are `surname` and `name`. The parameters are case insensitive.
+GET     | `/getplayer/{playerId}` | Get the data about the player specified by his playerId.
+POST    | `/api/addplayer`     | Add new player
 
+<strong><a href="https://thefootballwall.herokuapp.com/try-api.html" target="_blank"><button>TRY THE APIs</button></a></strong>
 
 
 ### Logs
@@ -92,20 +104,50 @@ The home page contains a paginated table with the ranking of the players, ordere
 <p align="center">
   <img alt="homepage" src="./img/homepage.png" width="450" title="homepage" style="border: 1px solid #555">
 </p>
-Each page of the table shows a maximum of 10 players. By clicking on the page number buttons, another page will be showed and by an API call the page will be builded.  
+Each page of the table shows a maximum of 10 players. By clicking on the page number buttons, another page will be shown and by an API call the page will be builded.  
 To get a non-paginated table, the user can click on the "Full ranking" button, on the lower right corner of the table: the click on this button will redirect the user to another page in which a table will be builded dynamically retrieving data from db.  
 <p align="center">
   <img alt="rankingpage" src="./img/rankingpage.png" width="450" title="rankingpage" style="border: 1px solid #555">
 </p>
 This table has the possibility to get a custom order that the user can choose. This ordering is implemented in a static way: the table is build by a REST API call and once it was created the data inside the table rows can be manipulated with an alghorithm (<a href="https://www.w3schools.com/howto/howto_js_sort_table.asp" target="blank">click here</a> to see the algorithm used) that allows the user to choose the order of table.  
-
-
+  
+When you click on a table row, you choose to see more information about the player associated to the row and a page will be opened and dynamically builded. This page will builded by a REST API get call and shows the data about the selected player:
 <p align="center">
   <img alt="playerpage" src="./img/playerpage.png" width="450" title="playerpage" style="border: 1px solid #555">
-</p>
+</p>  
+Another page you can see is the Top Ten page that shows the list of the first 10 best players, ordered by their total score:
 <p align="center">
   <img alt="toptenpage" src="./img/toptenpage.png" width="450" title="toptenpage" style="border: 1px solid #555">
 </p>
+By clicking on the "more" button, a modal, similar to the previously viewed page, will be shown.  
+The user has the possibility to add a player by using the page Add Player.
+In this case a POST call will used to do the adding of the player to our db.
 <p align="center">
   <img alt="playeraddpage" src="./img/playeraddpage.png" width="450" title="playeraddpage" style="border: 1px solid #555">
-</p>
+</p>  
+
+
+<hr style="height:3px; border:none; color:rgb(60,90,180); background-color:rgba(60,90,180,0.1);">
+
+## The environment
+In order to develop this project, I decided to use two environments. In this way, the development phase was divided from the deployment phase and this structure allows to manage in a better way the data stored into development database and production database.  
+The mechanism to do this uses the Spring Boot profiles.
+
+### Development Environment
+The development of this platform was performed using different tools for front-end and back-end. The front-end part was developed using VSCode, instead the back-end using Eclipse.  
+Before merging under unique build path the front-end and the back-end, I used the Live Server plugin of VSCode to allow the code to run. This plugin create a web server and exposes it by default on the port 5500 of 127.0.0.1 so in odrer to make in communication the front-end with the back-end and allows the front-end to call the APIs, each api on the back-end was annotated with the Spring annotation
+```Java
+@CrossOrigin(origins = "http://127.0.0.1:5500")
+```
+which specifies the address of the api users.  
+To use the db, I used an instance of MongoDB by creating a Docker container and I used it on localhost:27017.
+
+### Production Environment
+The web-app was deployed using <strong>Heroku</strong>, and you can try it by <a href="https://thefootballwall.heroku.com" target="blank">clicking here</a>.  
+In this case, the data was stored on a "production DB" that is hosted on the <strong>Atlas</strong> cloud (the official MongoDB cloud).  
+In order to divide production from development environments, I used the Spring Boot profiles and for the production environment I used some Env Variables configured on Heroku dashboard.  
+The Deploy is automatically triggered when a push on the branch master of this GitHub repo will be thrown.  
+  
+<br>    
+<br>
+<strong><a href="https://thefootballwall.herokuapp.com/" target="_blank"><button>Watch online!</button></a></strong>

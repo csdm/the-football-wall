@@ -1,10 +1,8 @@
 spring:    
-  data:
-    mongodb:
+  data:    mongodb:
       host: localhost
       port: 27017
-      database: TheFootballWall
-
+      database: TheFootballWall      
 server:
   port: 8080
   

@@ -123,33 +123,3 @@ legend {
       transform: rotate(360deg);
     }
   }
-  
-
-
-/********************************************/
-/********************************************/
-/********************************************/
-/******************ELIMINARE*****************/
-.darkbg{
-    background-color: #005F73;
-    border-radius: 5px;
-    border-color: yellow !important;
-    border: solid 3px;
-    color: #fff;
-}
-
-.lightbg{
-    background-color: #0A9396;
-    border-radius: 5px;
-    border-color: red !important;
-    border: dashed 3px;
-    color: #fff;
-}
-
-.contBg {
-    background-color: rgb(238, 165, 77) !important;
-}
-
-.removePadding {
-    padding-left: 0px !important;
-}
