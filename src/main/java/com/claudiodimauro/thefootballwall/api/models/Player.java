@@ -17,8 +17,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-@Schema(accessMode = AccessMode.READ_WRITE,
-		description = "It represents the data model of a football player. "
+@Schema(description = "It represents the data model of a football player. "
 					+ "This model specifies the personal data and the data relating to the skills "
 					+ "and statistics of each player.")
 public class Player {

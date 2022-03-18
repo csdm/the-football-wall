@@ -7,6 +7,7 @@ import javax.validation.constraints.NotEmpty;
 import com.claudiodimauro.thefootballwall.api.beans.SkillBean;
 import com.claudiodimauro.thefootballwall.api.beans.StatisticBean;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
 

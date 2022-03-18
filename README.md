@@ -22,7 +22,7 @@ The Football Wall is a full-stack project I made to learn or better understand s
         * Axios
   
   <br>
-  <strong><a href="https://thefootballwall.herokuapp.com/" target="_blank"><button>Watch online!</button></a></strong>
+  <strong><a href="https://thefootballwall.herokuapp.com/" target="_blank">Watch the project!</a></strong>
 
 <hr style="height:3px; border:none; color:rgb(60,90,180); background-color:rgb(60,90,180);">
 
@@ -40,6 +40,7 @@ The Football Wall is a full-stack project I made to learn or better understand s
 
 <hr style="height:3px; border:none; color:rgb(60,90,180); background-color:rgba(60,90,180,0.1);">
 
+<br>
 ## Project description
 **The Football Wall** was born from the desire to put together different technologies, in order to invole myself in a full-stack development that would allow me to learn as much as possible.  
 I was looking for an idea to start the project, but my little immagination blocked me for a couple of days: I thought that an idea was absolutely necessary before start a work, because without a clear idea I would not have known where to end up.  
@@ -58,6 +59,7 @@ This could appear as a non-sense schema, but as I said before, Kafka will be use
 
 <hr style="height:3px; border:none; color:rgb(60,90,180); background-color:rgba(60,90,180,0.1);">
 
+<br>
 ## Back-end
 ### APIs
 As already mentioned in the previous paragraph, the information relating to a player is kept within a MongoDB database and is accessed, entered or manipulated through REST APIs.  
@@ -71,7 +73,7 @@ GET     | `/api/getplayer`     | Get data about the spcified football player and
 GET     | `/getplayer/{playerId}` | Get the data about the player specified by his playerId.
 POST    | `/api/addplayer`     | Add new player
 
-<strong><a href="https://thefootballwall.herokuapp.com/try-api.html" target="_blank"><button>TRY THE APIs</button></a></strong>
+<strong><a href="https://thefootballwall.herokuapp.com/try-api.html" target="_blank">Try the APIs</a></strong>
 
 
 ### Logs
@@ -94,6 +96,7 @@ clear; zgrep <string_to_retrieve> ./*2022-02-17*.gz
 
 <hr style="height:3px; border:none; color:rgb(60,90,180); background-color:rgba(60,90,180,0.1);">
 
+<br>
 ## Front-end
 The front-end was developed using the "old school" tools: HTML5, CSS3 and JavaScript Vanilla.  
 Why I used JavaScript vanilla? Because I didn't know well this programming languagge: I've use it often but with but with a superficial knowledge of it. So I decided to build this project starting from primordial style of coding. It wouldn't have made sense to use more modern frameworks like Angular or React without a good knowledge of JavaScript.  
@@ -129,6 +132,7 @@ In this case a POST call will used to do the adding of the player to our db.
 
 <hr style="height:3px; border:none; color:rgb(60,90,180); background-color:rgba(60,90,180,0.1);">
 
+<br>
 ## The environment
 In order to develop this project, I decided to use two environments. In this way, the development phase was divided from the deployment phase and this structure allows to manage in a better way the data stored into development database and production database.  
 The mechanism to do this uses the Spring Boot profiles.
@@ -150,4 +154,8 @@ The Deploy is automatically triggered when a push on the branch master of this G
   
 <br>    
 <br>
-<strong><a href="https://thefootballwall.herokuapp.com/" target="_blank"><button>Watch online!</button></a></strong>
+<strong><a href="https://thefootballwall.herokuapp.com/" target="_blank">Watch the project!</a></strong>
+
+<br>    
+<br>
+<p style="font-size: 10px"><strong>*NOTE:</strong> the Heroku free plan provides that after a certain time of inactivity the server goes into a state of freezing. Don't worry if the page will not be reachable immediately: at the first access after the freezing the server will take a few seconds to start.</p>

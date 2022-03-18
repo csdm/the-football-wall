@@ -67,6 +67,7 @@ public class PlayerController {
 	})
 	public @ResponseBody ResponseEntity<?> getAllPlayers() {
 		logger.debug("REST CALL - method: {} - path: {}", HttpMethod.GET, "api/getplayer/all");
+		logger.info("REST CALL - method: {} - path: {}", HttpMethod.GET, "api/getplayer/all");
 
 		GenericResponse<?> output = null;
 		HttpStatus httpStatus = HttpStatus.OK;
@@ -113,6 +114,7 @@ public class PlayerController {
 			@RequestParam(required = false, defaultValue = "10") int pageSize
 			) {
 		logger.debug("REST CALL - method: {} - path: {}", HttpMethod.GET, "api/getplayer/all/paginated");
+		logger.info("REST CALL - method: {} - path: {}", HttpMethod.GET, "api/getplayer/all/paginated");
 
 		GenericResponse<?> output = null;
 		HttpStatus httpStatus = HttpStatus.OK;
@@ -155,6 +157,7 @@ public class PlayerController {
 	})
 	public @ResponseBody ResponseEntity<?> getTopTen() {
 		logger.debug("REST CALL - method: {} - path: {}", HttpMethod.GET, "api/getplayer/topten");
+		logger.info("REST CALL - method: {} - path: {}", HttpMethod.GET, "api/getplayer/topten");
 
 		GenericResponse<?> output = null;
 		HttpStatus httpStatus = HttpStatus.OK;
@@ -215,6 +218,7 @@ public class PlayerController {
 			stCapitalName = name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase();
 		
 		logger.debug("REST CALL - method: {} - path: {} - searchKey: {}, {}", HttpMethod.GET, "api/getplayer", stCapitalName, stCapitalSurname);
+		logger.info("REST CALL - method: {} - path: {} - searchKey: {}, {}", HttpMethod.GET, "api/getplayer", stCapitalName, stCapitalSurname);
 
 		GenericResponse<?> output = null;
 		HttpStatus httpStatus = HttpStatus.OK;
@@ -304,6 +308,7 @@ public class PlayerController {
 	})
 	public @ResponseBody ResponseEntity<?> addPlayer(@Valid @RequestBody RequestPostDTO request) { 
 		logger.debug("REST CALL - method: {} - path: {} - request for: {}, {}", HttpMethod.POST, "api/addplayer", request.getSurname(), request.getName());
+		logger.info("REST CALL - method: {} - path: {} - request for: {}, {}", HttpMethod.POST, "api/addplayer", request.getSurname(), request.getName());
 
 		Player player = new Player(request.getPlayerId(), request.getName(), request.getSurname(), 
 				request.getAge(), request.getNationality(), request.getRole(), 

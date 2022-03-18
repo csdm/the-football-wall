@@ -30,13 +30,13 @@ import com.claudiodimauro.thefootballwall.utils.Constants;
 @Service("PlayerServiceImpl")
 public class PlayerServiceImpl implements PlayerService {
 	private static final Logger logger = LoggerFactory.getLogger(PlayerServiceImpl.class);
-	
+
 	@Autowired
 	PlayerRepository repository;
-	
+
 	@Autowired
 	MongoTemplate template;
-	
+
 	/*****************************************************************
 	 * SERVICE METHOD
 	 * METHOD: findAllPlayers()
@@ -46,7 +46,7 @@ public class PlayerServiceImpl implements PlayerService {
 	 *****************************************************************/
 	public BasePlayerResponse<?> findAllPlayers() {
 		List<Player> list = repository.findAll();
-		
+
 		/**
 		 * Setting the default order for the list: totalScore DESC
 		 * In this case I decided to use a simple sort on the list in order to don't touch the part about 
@@ -58,17 +58,18 @@ public class PlayerServiceImpl implements PlayerService {
 				return p2.getTotalScore() - p1.getTotalScore();
 			}
 		});
-		
+
 		if(list.isEmpty()) {			
 			logger.debug("Search status: {} - Search results: found {} player(s)", Constants.Flag.NO_PLAYER_FOUND, 0);
 			return new ListPlayerResponse(new PlayerRequestBean(), Constants.Flag.NO_PLAYER_FOUND, 0L, list);
-		} else {
-			logger.debug("Search status: {} - Search results: found {} player(s)", Constants.Flag.OK, list.size());
-			return new ListPlayerResponse(new PlayerRequestBean(), Constants.Flag.OK, (long)list.size(), list);
-		}
+		} 
+
+		logger.debug("Search status: {} - Search results: found {} player(s)", Constants.Flag.OK, list.size());
+		return new ListPlayerResponse(new PlayerRequestBean(), Constants.Flag.OK, (long)list.size(), list);
+
 	}
-	
-	
+
+
 	/*****************************************************************
 	 * SERVICE METHOD
 	 * METHOD: findPaginatedPlayers(int pg, int size)
@@ -77,21 +78,25 @@ public class PlayerServiceImpl implements PlayerService {
 	 * 
 	 *****************************************************************/
 	public BasePlayerResponse<?> findPaginatedPlayers(int pg, int size) {
-		
+
 		/**
 		 * Default sort: totalScore descending
 		 */
 		Page<Player> page = repository.findAll(PageRequest.of(pg, size, Sort.by("totalScore").descending()));
-		
+
 		if(page == null) {
 			logger.debug("Search status: {} - Search results: found {} player(s)", Constants.Flag.NO_PLAYER_FOUND, 0);
+			logger.info("Search status: {}", Constants.Flag.NO_PLAYER_FOUND);
+			
 			return new PlayerPaginationResponse(new PlayerRequestBean(), Constants.Flag.NO_PLAYER_FOUND, 0L, page);
-		} else {
-			logger.debug("Search status: {} - Search results: found {} player(s) to show in the page number {}", Constants.Flag.OK, page.getNumberOfElements(), page.getNumber());
-			return new PlayerPaginationResponse(new PlayerRequestBean(), Constants.Flag.OK, page.getTotalElements(), page);
-		}
+		} 
+
+		logger.debug("Search status: {} - Search results: found {} player(s) to show in the page number {}", Constants.Flag.OK, page.getNumberOfElements(), page.getNumber());
+		logger.info("Search status: {} - Search results: found {} player(s) to show in the page number {}", Constants.Flag.OK, page.getNumberOfElements(), page.getNumber());
+		return new PlayerPaginationResponse(new PlayerRequestBean(), Constants.Flag.OK, page.getTotalElements(), page);
+
 	}
-	
+
 	/*****************************************************************
 	 * SERVICE METHOD
 	 * METHOD: findPagifindPlayeratedPlayers(String surname, String name)
@@ -102,30 +107,32 @@ public class PlayerServiceImpl implements PlayerService {
 	public BasePlayerResponse<?> findPlayer(String surname, String name) {
 		PlayerRequestBean request = new PlayerRequestBean();
 		Query query = new Query();
-		
+
 		if(surname != null) {
 			request.setPlayerSurname(surname);
 			query.addCriteria(Criteria.where("surname").is(surname));
 		}
-			
+
 		if(name != null) {
 			request.setPlayerName(name);
 			query.addCriteria(Criteria.where("name").is(name));
 		}
-				
+
 		List<Player> list = template.find(query, Player.class);
-		
-		
+
+
 		if(list.isEmpty()) {
 			logger.debug("Search status: {} - Search results: found {} player(s)", Constants.Flag.NO_PLAYER_FOUND, 0);
+			logger.info("Search status: {} ", Constants.Flag.NO_PLAYER_FOUND);
 			return new ListPlayerResponse(request, Constants.Flag.NO_PLAYER_FOUND, 0L, list); 
-		} else {		
-			logger.debug("Search status: {} - Search results: found {} player(s)", Constants.Flag.OK, list.size());
-			return new ListPlayerResponse(request, Constants.Flag.OK, (long)list.size(), list);
-		}
+		} 
+
+		logger.debug("Search status: {} - Search results: found {} player(s)", Constants.Flag.OK, list.size());
+		logger.info("Search status: {} - Search results: found {} player(s)", Constants.Flag.OK, list.size());
+		return new ListPlayerResponse(request, Constants.Flag.OK, (long)list.size(), list);
 	}
-		
-			
+
+
 	/*****************************************************************
 	 * SERVICE METHOD
 	 * METHOD: findPlayerByPlayerId(String playerId)
@@ -135,21 +142,23 @@ public class PlayerServiceImpl implements PlayerService {
 	 *****************************************************************/
 	public BasePlayerResponse<?> findPlayerByPlayerId(String playerId) {
 		//List<Player> list = repository.findByPlayerId(playerId);
-		
+
 		Optional<Player> player = repository.findByPlayerId(playerId);
 		PlayerRequestBean request = new PlayerRequestBean();
 		request.setPlayerId(playerId);
-		
+
 		if(! player.isPresent()){
 			logger.debug("Search status: {} - Search results: no one player with id {}", Constants.Flag.NO_PLAYER_FOUND, playerId);
+			logger.info("Search status: {}", Constants.Flag.NO_PLAYER_FOUND);
 			return new SinglePlayerResponse(request, Constants.Flag.NO_PLAYER_FOUND, 0L, null); 
 		} 		
-			
+
 		logger.debug("Search status: {} - Search results: found {}", Constants.Flag.OK, playerId);
+		logger.info("Search status: {} - Search results: found {}", Constants.Flag.OK, playerId);
 		return new SinglePlayerResponse(request, Constants.Flag.NO_PLAYER_FOUND, 1L, player.get()); 		
 	}
-	
-	
+
+
 	/*****************************************************************
 	 * SERVICE METHOD
 	 * METHOD: findTopTenPlayers()
@@ -160,7 +169,7 @@ public class PlayerServiceImpl implements PlayerService {
 	public BasePlayerResponse<?> findTopTenPlayers() {
 		Query query = new Query();
 		query.addCriteria(Criteria.where("totalScore").gte(80));
-		
+
 		/**
 		 * Query ordering
 		 */
@@ -170,22 +179,24 @@ public class PlayerServiceImpl implements PlayerService {
 		orders.add(orderByTotalScoreDesc);
 		orders.add(orderBySurnameAsc);
 		/*****/
-		
+
 		query.with(Sort.by(orders));
 		query.limit(10);
-		
+
 		List<Player> list = template.find(query, Player.class);
-		
+
 		if(list.isEmpty()) {			
 			logger.debug("Search status: {} - Search results: found {} player(s) of 10 players", Constants.Flag.NO_PLAYER_FOUND, 0);
+			logger.info("Search status: {}", Constants.Flag.NO_PLAYER_FOUND);
 			return new ListPlayerResponse(new PlayerRequestBean(), Constants.Flag.NO_PLAYER_FOUND, 0L, list);
-		} else {
-			logger.debug("Search status: {} - Search results: found {} player(s) of 10 players", Constants.Flag.OK, list.size());
-			return new ListPlayerResponse(new PlayerRequestBean(), Constants.Flag.OK, (long)list.size(), list);
-		}
+		} 
+
+		logger.debug("Search status: {} - Search results: found {} player(s) of 10 players", Constants.Flag.OK, list.size());
+		logger.info("Search status: {} - Search results: found {} player(s) of 10 players", Constants.Flag.OK, list.size());
+		return new ListPlayerResponse(new PlayerRequestBean(), Constants.Flag.OK, (long)list.size(), list);
 	}
-	
-	
+
+
 	/*****************************************************************
 	 * SERVICE METHOD
 	 * METHOD: addPlayer(Player player)
@@ -196,10 +207,14 @@ public class PlayerServiceImpl implements PlayerService {
 	public BasePlayerResponse<?> addPlayer(Player player) {
 		try {
 			repository.insert(player);
+			logger.debug("Player addedd succesfully: {}", player);
+			logger.info("Player addedd succesfully: {} {}", player.getName(), player.getSurname());
 			return new PlayerInsertResponse(player, Constants.Flag.OK);
 		} catch(Exception ex) {
+			logger.debug("ERROR: {}", ex.getMessage());
+			logger.info("ERROR: {}", ex.getMessage());
 			return new PlayerInsertResponse(player, Constants.Flag.KO + " " + ex.getMessage());
 		}
 	}
-	
+
 }
