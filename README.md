@@ -24,7 +24,8 @@ The Football Wall is a full-stack project I made to learn or better understand s
   <br>
   <strong><a href="https://thefootballwall.herokuapp.com/" target="_blank">Watch the project!</a></strong>
 
-<hr style="height:3px; border:none; color:rgb(60,90,180); background-color:rgb(60,90,180);">
+<br>
+<br>
 
 ## Table of contents <!-- omit in toc -->
 - [Project description](#project-description)
