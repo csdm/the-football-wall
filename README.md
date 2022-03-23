@@ -45,7 +45,7 @@ The Football Wall is a full-stack project I made to learn or better understand s
 ## Project description
 **The Football Wall** was born from the desire to put together different technologies, in order to invole myself in a full-stack development that would allow me to learn as much as possible.  
 I was looking for an idea to start the project, but my little immagination blocked me for a couple of days: I thought that an idea was absolutely necessary before start a work, because without a clear idea I would not have known where to end up.  
-After many hours of thinking and after some Google searches I found a page that gave me the inspiration to start. This page is the EA Sports Fifa 21 rating database ([you can see it by clicking here](https://www.ea.com/en-gb/games/fifa/fifa-21/ratings/ratings-database)).  
+After many hours of thinking and after some Google searches I found a page that gave me the inspiration to start. This page is the EA Sports Fifa 21 rating database [you can see it by clicking here](https://www.ea.com/en-gb/games/fifa/fifa-21/ratings/ratings-database).  
 So, starting from this page, I decided to build a web app that could show some data to the users, retrieving them from a database, using some rest APIs.  
 The EA Sports pages give me the inspiration for the data to use, in fact The Football Wall will use the information about football players contained in the aforementioned site.  
 All information are "manually" inserted in the DB of this web app and not retrieved directly from the EA Sports page.
