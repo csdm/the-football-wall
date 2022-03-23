@@ -37,6 +37,7 @@ The Football Wall is a full-stack project I made to learn or better understand s
 - [The environment](#the-environment)
   - [Development Environment](#development-environment)
   - [Production Environment](#production-environment)
+- [Possible future additions](#possible-future-additions)
 
 <hr style="height:3px; border:none; color:rgb(60,90,180); background-color:rgba(60,90,180,0.1);">
 
@@ -151,7 +152,19 @@ The web-app was deployed using <strong>Heroku</strong>, and you can try it by <a
 In this case, the data was stored on a "production DB" that is hosted on the <strong>Atlas</strong> cloud (the official MongoDB cloud).  
 In order to divide production from development environments, I used the Spring Boot profiles and for the production environment I used some Env Variables configured on Heroku dashboard.  
 The Deploy is automatically triggered when a push on the branch master of this GitHub repo will be thrown.  
-  
+<br>    
+<br>
+<hr style="height:3px; border:none; color:rgb(60,90,180); background-color:rgba(60,90,180,0.1);">
+## Possible future additions
+In the future I think to integrate this web app with other technologies that will allow me to learn other things, like the integration of SQL in Spring Boot.  
+The technologies I would like to integrate are: 
+* Apache Kafka
+* Oracle SQL
+* Hibernate
+* ReactJS (with a refactor of the front-end part from pure JS to React)  
+In the future I think to "dockerize" the web app, in order to allow the users to try and run it in a local container.  
+This is a simple project without a real functional purpose, however introducing Docker is an additional feature to add to the set of technologies involved. 
+
 <br>    
 <br>
 <strong><a href="https://thefootballwall.herokuapp.com/" target="_blank">Watch the project!</a></strong>
