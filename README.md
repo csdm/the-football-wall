@@ -24,22 +24,6 @@ The Football Wall is a full-stack project I made to learn or better understand s
   <br>
   <strong><a href="https://thefootballwall.herokuapp.com/" target="_blank">Watch the project!</a></strong>
 
-<br>
-<br>
-
-## Table of contents <!-- omit in toc -->
-- [Project description](#project-description)
-- [Back-end](#back-end)
-  - [APIs](#apis)
-  - [Logs](#logs)
-    - [Example of log search](#example-of-log-search)
-- [Front-end](#front-end)
-  - [The FE structure](#the-fe-structure)
-- [The environment](#the-environment)
-  - [Development Environment](#development-environment)
-  - [Production Environment](#production-environment)
-- [Possible future additions](#possible-future-additions)
-
 
 <br>
 ## Project description
