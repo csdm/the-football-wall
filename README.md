@@ -22,7 +22,6 @@ The Football Wall is a full-stack project I made to learn or better understand s
         * Axios
   
   
-  <strong><a href="https://thefootballwall.herokuapp.com/" target="_blank">Watch the project!</a></strong>
 
 
 
@@ -36,9 +35,7 @@ All information are "manually" inserted in the DB of this web app and not retrie
 Actually the software structure foresees the presence of a front-end that interfaces with the back-end through REST APIs.  
 The back-end exposes some functionality that communicate with MongoDB to make the CRUD operations and to do this are used the Mongo connectors.  
 In a near future I would like to include Kafka, for purely educational purposes, to try the communication between two microservices and the communication from front-end to DB will be done passing by two microservices in which only one of them has directly connection to Mongo.  
-<p align="center">
-  <img alt="schemas_as_is_to_be" src="./img/diagrammi_progetto.png" width="450" title="As Is-To Be">
-</p>
+
 As you can see in the schemas above, in the TO BE schema the only purpose of MS2 is to communicate with Mongo in writing mode and MS1 communicate with MS2 via Kafka and in reading mode with DB.  
 This could appear as a non-sense schema, but as I said before, Kafka will be used only for learning and this connection appears as a good way to make some tests.
 
@@ -57,7 +54,7 @@ GET     | `/api/getplayer`     | Get data about the spcified football player and
 GET     | `/getplayer/{playerId}` | Get the data about the player specified by his playerId.
 POST    | `/api/addplayer`     | Add new player
 
-<strong><a href="https://thefootballwall.herokuapp.com/try-api.html" target="_blank">Try the APIs</a></strong>
+
 
 
 ### Logs
@@ -86,30 +83,20 @@ Why I used JavaScript vanilla? Because I didn't know well this programming langu
 ### The FE structure
 The front-end has a structure that allows the user to read or insert data about football players and it's build by using some REST calls that retrieve data from MongoDB and shows them in the browser.  
 The home page contains a paginated table with the ranking of the players, ordered by descending total score.
-<p align="center">
-  <img alt="homepage" src="./img/homepage.png" width="450" title="homepage" style="border: 1px solid #555">
-</p>
+
 Each page of the table shows a maximum of 10 players. By clicking on the page number buttons, another page will be shown and by an API call the page will be builded.  
 To get a non-paginated table, the user can click on the "Full ranking" button, on the lower right corner of the table: the click on this button will redirect the user to another page in which a table will be builded dynamically retrieving data from db.  
-<p align="center">
-  <img alt="rankingpage" src="./img/rankingpage.png" width="450" title="rankingpage" style="border: 1px solid #555">
-</p>
-This table has the possibility to get a custom order that the user can choose. This ordering is implemented in a static way: the table is build by a REST API call and once it was created the data inside the table rows can be manipulated with an alghorithm (<a href="https://www.w3schools.com/howto/howto_js_sort_table.asp" target="blank">click here</a> to see the algorithm used) that allows the user to choose the order of table.  
+
+This table has the possibility to get a custom order that the user can choose. This ordering is implemented in a static way: the table is build by a REST API call and once it was created the data inside the table rows can be manipulated with an alghorithm () that allows the user to choose the order of table.  
   
 When you click on a table row, you choose to see more information about the player associated to the row and a page will be opened and dynamically builded. This page will builded by a REST API get call and shows the data about the selected player:
-<p align="center">
-  <img alt="playerpage" src="./img/playerpage.png" width="450" title="playerpage" style="border: 1px solid #555">
-</p>  
+
 Another page you can see is the Top Ten page that shows the list of the first 10 best players, ordered by their total score:
-<p align="center">
-  <img alt="toptenpage" src="./img/toptenpage.png" width="450" title="toptenpage" style="border: 1px solid #555">
-</p>
+
 By clicking on the "more" button, a modal, similar to the previously viewed page, will be shown.  
 The user has the possibility to add a player by using the page Add Player.
 In this case a POST call will used to do the adding of the player to our db.
-<p align="center">
-  <img alt="playeraddpage" src="./img/playeraddpage.png" width="450" title="playeraddpage" style="border: 1px solid #555">
-</p>  
+
 
 
 ## The environment
@@ -126,8 +113,8 @@ which specifies the address of the api users.
 To use the db, I used an instance of MongoDB by creating a Docker container and I used it on localhost:27017.
 
 ### Production Environment
-The web-app was deployed using <strong>Heroku</strong>, and you can try it by <a href="https://thefootballwall.heroku.com" target="blank">clicking here</a>.  
-In this case, the data was stored on a "production DB" that is hosted on the <strong>Atlas</strong> cloud (the official MongoDB cloud).  
+The web-app was deployed using Heroku, and you can try it by 
+In this case, the data was stored on a "production DB" that is hosted on the Atlas cloud (the official MongoDB cloud).  
 In order to divide production from development environments, I used the Spring Boot profiles and for the production environment I used some Env Variables configured on Heroku dashboard.  
 The Deploy is automatically triggered when a push on the branch master of this GitHub repo will be thrown.      
 
@@ -144,8 +131,8 @@ This is a simple project without a real functional purpose, however introducing 
 
     
 
-<strong><a href="https://thefootballwall.herokuapp.com/" target="_blank">Watch the project!</a></strong>
+
 
     
 
-<p style="font-size: 10px"><strong>*NOTE:</strong> the Heroku free plan provides that after a certain time of inactivity the server goes into a state of freezing. Don't worry if the page will not be reachable immediately: at the first access after the freezing the server will take a few seconds to start.</p>
+*NOTE: the Heroku free plan provides that after a certain time of inactivity the server goes into a state of freezing. Don't worry if the page will not be reachable immediately: at the first access after the freezing the server will take a few seconds to start.
