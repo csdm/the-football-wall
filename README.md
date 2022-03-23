@@ -39,7 +39,6 @@ The Football Wall is a full-stack project I made to learn or better understand s
   - [Production Environment](#production-environment)
 - [Possible future additions](#possible-future-additions)
 
-<hr style="height:3px; border:none; color:rgb(60,90,180); background-color:rgba(60,90,180,0.1);">
 
 <br>
 ## Project description
@@ -58,7 +57,6 @@ In a near future I would like to include Kafka, <u>for purely educational purpos
 As you can see in the schemas above, in the TO BE schema the only purpose of MS2 is to communicate with Mongo in writing mode and MS1 communicate with MS2 via Kafka and in reading mode with DB.  
 This could appear as a non-sense schema, but as I said before, Kafka will be used only for learning and this connection appears as a good way to make some tests.
 
-<hr style="height:3px; border:none; color:rgb(60,90,180); background-color:rgba(60,90,180,0.1);">
 
 <br>
 ## Back-end
@@ -95,8 +93,6 @@ To search on archived logs (change the date to get the right logs):
 clear; zgrep <string_to_retrieve> ./*2022-02-17*.gz 
 ```  
 
-<hr style="height:3px; border:none; color:rgb(60,90,180); background-color:rgba(60,90,180,0.1);">
-
 <br>
 ## Front-end
 The front-end was developed using the "old school" tools: HTML5, CSS3 and JavaScript Vanilla.  
@@ -130,9 +126,6 @@ In this case a POST call will used to do the adding of the player to our db.
   <img alt="playeraddpage" src="./img/playeraddpage.png" width="450" title="playeraddpage" style="border: 1px solid #555">
 </p>  
 
-
-<hr style="height:3px; border:none; color:rgb(60,90,180); background-color:rgba(60,90,180,0.1);">
-
 <br>
 ## The environment
 In order to develop this project, I decided to use two environments. In this way, the development phase was divided from the deployment phase and this structure allows to manage in a better way the data stored into development database and production database.  
@@ -151,10 +144,9 @@ To use the db, I used an instance of MongoDB by creating a Docker container and 
 The web-app was deployed using <strong>Heroku</strong>, and you can try it by <a href="https://thefootballwall.heroku.com" target="blank">clicking here</a>.  
 In this case, the data was stored on a "production DB" that is hosted on the <strong>Atlas</strong> cloud (the official MongoDB cloud).  
 In order to divide production from development environments, I used the Spring Boot profiles and for the production environment I used some Env Variables configured on Heroku dashboard.  
-The Deploy is automatically triggered when a push on the branch master of this GitHub repo will be thrown.  
-<br>    
+The Deploy is automatically triggered when a push on the branch master of this GitHub repo will be thrown.      
 <br>
-<hr style="height:3px; border:none; color:rgb(60,90,180); background-color:rgba(60,90,180,0.1);">
+
 ## Possible future additions
 In the future I think to integrate this web app with other technologies that will allow me to learn other things, like the integration of SQL in Spring Boot.  
 The technologies I would like to integrate are: 
