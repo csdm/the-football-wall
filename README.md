@@ -54,7 +54,7 @@ As you can see in the schemas above, in the TO BE schema the only purpose of MS2
 This could appear as a non-sense schema, but as I said before, Kafka will be used only for learning and this connection appears as a good way to make some tests.
 
 
-
+----
 ## Back-end
 ### APIs
 As already mentioned in the previous paragraph, the information relating to a player is kept within a MongoDB database and is accessed, entered or manipulated through REST APIs.  
@@ -70,6 +70,7 @@ POST    | `/api/addplayer`     | Add new player
 
 **[Try the APIs](https://thefootballwall.herokuapp.com/try-api.html)**
 
+----
 ### Logs
 The logs are sored under a folder called Logs in which you'll find a daily file (tfw-BE.log) and a series of compressed (gz) files.  
 The logging policy store files for a max-size of 1MB.  
@@ -88,7 +89,7 @@ To search on archived logs (change the date to get the right logs):
 clear; zgrep <string_to_retrieve> ./*2022-02-17*.gz 
 ```  
 
-
+----
 ## Front-end
 The front-end was developed using the "old school" tools: HTML5, CSS3 and JavaScript Vanilla.  
 Why I used JavaScript vanilla? Because I didn't know well this programming languagge: I've use it often but with but with a superficial knowledge of it. So I decided to build this project starting from primordial style of coding. It wouldn't have made sense to use more modern frameworks like Angular or React without a good knowledge of JavaScript.  
@@ -121,7 +122,7 @@ In this case a POST call will used to do the adding of the player to our db.
   <img alt="playeraddpage" src="./img/playeraddpage.png" width="450" title="playeraddpage" style="border: 1px solid #555">
   
 
-
+----
 ## The environment
 In order to develop this project, I decided to use two environments. In this way, the development phase was divided from the deployment phase and this structure allows to manage in a better way the data stored into development database and production database.  
 The mechanism to do this uses the Spring Boot profiles.
@@ -136,12 +137,12 @@ which specifies the address of the api users.
 To use the db, I used an instance of MongoDB by creating a Docker container and I used it on localhost:27017.
 
 ### Production Environment
-The web-app was deployed using **Heroku**, and you can try it by [clicking here](https://thefootballwall.heroku.com). 
+The web-app was deployed using **Heroku**[^1], and you can try it by [clicking here](https://thefootballwall.heroku.com). 
 In this case, the data was stored on a "production DB" that is hosted on the **Atlas** cloud (the official MongoDB cloud).  
 In order to divide production from development environments, I used the Spring Boot profiles and for the production environment I used some Env Variables configured on Heroku dashboard.  
 The Deploy is automatically triggered when a push on the branch master of this GitHub repo will be thrown.      
 
-
+---
 ## Possible future additions
 In the future I think to integrate this web app with other technologies that will allow me to learn other things, like the integration of SQL in Spring Boot.  
 The technologies I would like to integrate are: 
@@ -150,12 +151,9 @@ The technologies I would like to integrate are:
 * Hibernate
 * ReactJS (with a refactor of the front-end part from pure JS to React)  
 In the future I think to "dockerize" the web app, in order to allow the users to try and run it in a local container.  
-This is a simple project without a real functional purpose, however introducing Docker is an additional feature to add to the set of technologies involved. 
-
-    
+This is a simple project without a real functional purpose, however introducing Docker is an additional feature to add to the set of technologies involved.  
 
  **[Watch the project](https://thefootballwall.herokuapp.com/)**
 
     
-
-**NOTE:** the Heroku free plan provides that after a certain time of inactivity the server goes into a state of freezing. Don't worry if the page will not be reachable immediately: at the first access after the freezing the server will take a few seconds to start.
+[^1]: the Heroku free plan provides that after a certain time of inactivity the server goes into a state of freezing. Don't worry if the page will not be reachable immediately: at the first access after the freezing the server will take a few seconds to start.
