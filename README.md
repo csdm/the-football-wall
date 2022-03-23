@@ -46,10 +46,10 @@ The EA Sports pages give me the inspiration for the data to use, in fact The Foo
 All information are "manually" inserted in the DB of this web app and not retrieved directly from the EA Sports page.
 Actually the software structure foresees the presence of a front-end that interfaces with the back-end through REST APIs.  
 The back-end exposes some functionality that communicate with MongoDB to make the CRUD operations and to do this are used the Mongo connectors.  
-In a near future I would like to include Kafka, <u>for purely educational purposes</u>, to try the communication between two microservices and the communication from front-end to DB will be done passing by two microservices in which only one of them has directly connection to Mongo.  
-<p align="center">
+In a near future I would like to include Kafka, _for purely educational purposes_, to try the communication between two microservices and the communication from front-end to DB will be done passing by two microservices in which only one of them has directly connection to Mongo.  
+
   <img alt="schemas_as_is_to_be" src="./img/diagrammi_progetto.png" width="450" title="As Is-To Be">
-</p>
+
 As you can see in the schemas above, in the TO BE schema the only purpose of MS2 is to communicate with Mongo in writing mode and MS1 communicate with MS2 via Kafka and in reading mode with DB.  
 This could appear as a non-sense schema, but as I said before, Kafka will be used only for learning and this connection appears as a good way to make some tests.
 
@@ -96,30 +96,30 @@ Why I used JavaScript vanilla? Because I didn't know well this programming langu
 ### The FE structure
 The front-end has a structure that allows the user to read or insert data about football players and it's build by using some REST calls that retrieve data from MongoDB and shows them in the browser.  
 The home page contains a paginated table with the ranking of the players, ordered by descending total score.
-<p align="center">
+
   <img alt="homepage" src="./img/homepage.png" width="450" title="homepage" style="border: 1px solid #555">
-</p>
+
 Each page of the table shows a maximum of 10 players. By clicking on the page number buttons, another page will be shown and by an API call the page will be builded.  
 To get a non-paginated table, the user can click on the "Full ranking" button, on the lower right corner of the table: the click on this button will redirect the user to another page in which a table will be builded dynamically retrieving data from db.  
-<p align="center">
+
   <img alt="rankingpage" src="./img/rankingpage.png" width="450" title="rankingpage" style="border: 1px solid #555">
-</p>
+
 This table has the possibility to get a custom order that the user can choose. This ordering is implemented in a static way: the table is build by a REST API call and once it was created the data inside the table rows can be manipulated with an alghorithm ([click here](https://www.w3schools.com/howto/howto_js_sort_table.asp) to see the algorithm used) that allows the user to choose the order of table.  
   
 When you click on a table row, you choose to see more information about the player associated to the row and a page will be opened and dynamically builded. This page will builded by a REST API get call and shows the data about the selected player:
-<p align="center">
+
   <img alt="playerpage" src="./img/playerpage.png" width="450" title="playerpage" style="border: 1px solid #555">
-</p>  
+  
 Another page you can see is the Top Ten page that shows the list of the first 10 best players, ordered by their total score:
-<p align="center">
+
   <img alt="toptenpage" src="./img/toptenpage.png" width="450" title="toptenpage" style="border: 1px solid #555">
-</p>
+
 By clicking on the "more" button, a modal, similar to the previously viewed page, will be shown.  
 The user has the possibility to add a player by using the page Add Player.
 In this case a POST call will used to do the adding of the player to our db.
-<p align="center">
+
   <img alt="playeraddpage" src="./img/playeraddpage.png" width="450" title="playeraddpage" style="border: 1px solid #555">
-</p>  
+  
 
 
 ## The environment
@@ -158,4 +158,4 @@ This is a simple project without a real functional purpose, however introducing 
 
     
 
-<p style="font-size: 10px">**NOTE:** the Heroku free plan provides that after a certain time of inactivity the server goes into a state of freezing. Don't worry if the page will not be reachable immediately: at the first access after the freezing the server will take a few seconds to start.</p>
+**NOTE:** the Heroku free plan provides that after a certain time of inactivity the server goes into a state of freezing. Don't worry if the page will not be reachable immediately: at the first access after the freezing the server will take a few seconds to start.
