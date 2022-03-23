@@ -24,7 +24,7 @@ The Football Wall is a full-stack project I made to learn or better understand s
   **[Watch the project](https://thefootballwall.herokuapp.com/)**
 
 
-<br/>
+
 ## Project description
 **The Football Wall** was born from the desire to put together different technologies, in order to invole myself in a full-stack development that would allow me to learn as much as possible.  
 I was looking for an idea to start the project, but my little immagination blocked me for a couple of days: I thought that an idea was absolutely necessary before start a work, because without a clear idea I would not have known where to end up.  
@@ -42,7 +42,7 @@ As you can see in the schemas above, in the TO BE schema the only purpose of MS2
 This could appear as a non-sense schema, but as I said before, Kafka will be used only for learning and this connection appears as a good way to make some tests.
 
 
-<br/>
+
 ## Back-end
 ### APIs
 As already mentioned in the previous paragraph, the information relating to a player is kept within a MongoDB database and is accessed, entered or manipulated through REST APIs.  
@@ -76,7 +76,7 @@ To search on archived logs (change the date to get the right logs):
 clear; zgrep <string_to_retrieve> ./*2022-02-17*.gz 
 ```  
 
-<br/>
+
 ## Front-end
 The front-end was developed using the "old school" tools: HTML5, CSS3 and JavaScript Vanilla.  
 Why I used JavaScript vanilla? Because I didn't know well this programming languagge: I've use it often but with but with a superficial knowledge of it. So I decided to build this project starting from primordial style of coding. It wouldn't have made sense to use more modern frameworks like Angular or React without a good knowledge of JavaScript.  
@@ -109,7 +109,7 @@ In this case a POST call will used to do the adding of the player to our db.
   <img alt="playeraddpage" src="./img/playeraddpage.png" width="450" title="playeraddpage" style="border: 1px solid #555">
 </p>  
 
-<br/>
+
 ## The environment
 In order to develop this project, I decided to use two environments. In this way, the development phase was divided from the deployment phase and this structure allows to manage in a better way the data stored into development database and production database.  
 The mechanism to do this uses the Spring Boot profiles.
@@ -128,7 +128,7 @@ The web-app was deployed using **Heroku**, and you can try it by [clicking here]
 In this case, the data was stored on a "production DB" that is hosted on the **Atlas** cloud (the official MongoDB cloud).  
 In order to divide production from development environments, I used the Spring Boot profiles and for the production environment I used some Env Variables configured on Heroku dashboard.  
 The Deploy is automatically triggered when a push on the branch master of this GitHub repo will be thrown.      
-<br/>
+
 
 ## Possible future additions
 In the future I think to integrate this web app with other technologies that will allow me to learn other things, like the integration of SQL in Spring Boot.  
@@ -140,10 +140,10 @@ The technologies I would like to integrate are:
 In the future I think to "dockerize" the web app, in order to allow the users to try and run it in a local container.  
 This is a simple project without a real functional purpose, however introducing Docker is an additional feature to add to the set of technologies involved. 
 
-<br/>    
-<br/>
+    
+
  **[Watch the project](https://thefootballwall.herokuapp.com/)**
 
-<br/>    
-<br/>
+    
+
 <p style="font-size: 10px">**NOTE:** the Heroku free plan provides that after a certain time of inactivity the server goes into a state of freezing. Don't worry if the page will not be reachable immediately: at the first access after the freezing the server will take a few seconds to start.</p>
