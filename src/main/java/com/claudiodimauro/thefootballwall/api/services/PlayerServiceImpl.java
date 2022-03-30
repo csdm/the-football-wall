@@ -60,11 +60,13 @@ public class PlayerServiceImpl implements PlayerService {
 		});
 
 		if(list.isEmpty()) {			
-			logger.debug("Search status: {} - Search results: found {} player(s)", Constants.Flag.NO_PLAYER_FOUND, 0);
+			//logger.debug("Search status: {} - Search results: found {} player(s)", Constants.Flag.NO_PLAYER_FOUND, 0);
+			logger.info("Search status: {} - Search results: found {} player(s)", Constants.Flag.NO_PLAYER_FOUND, 0);
 			return new ListPlayerResponse(new PlayerRequestBean(), Constants.Flag.NO_PLAYER_FOUND, 0L, list);
 		} 
 
-		logger.debug("Search status: {} - Search results: found {} player(s)", Constants.Flag.OK, list.size());
+		//logger.debug("Search status: {} - Search results: found {} player(s)", Constants.Flag.OK, list.size());
+		logger.info("Search status: {} - Search results: found {} player(s)", Constants.Flag.OK, list.size());
 		return new ListPlayerResponse(new PlayerRequestBean(), Constants.Flag.OK, (long)list.size(), list);
 
 	}
@@ -85,13 +87,13 @@ public class PlayerServiceImpl implements PlayerService {
 		Page<Player> page = repository.findAll(PageRequest.of(pg, size, Sort.by("totalScore").descending()));
 
 		if(page == null) {
-			logger.debug("Search status: {} - Search results: found {} player(s)", Constants.Flag.NO_PLAYER_FOUND, 0);
+			//logger.debug("Search status: {} - Search results: found {} player(s)", Constants.Flag.NO_PLAYER_FOUND, 0);
 			logger.info("Search status: {}", Constants.Flag.NO_PLAYER_FOUND);
 			
 			return new PlayerPaginationResponse(new PlayerRequestBean(), Constants.Flag.NO_PLAYER_FOUND, 0L, page);
 		} 
 
-		logger.debug("Search status: {} - Search results: found {} player(s) to show in the page number {}", Constants.Flag.OK, page.getNumberOfElements(), page.getNumber());
+		//logger.debug("Search status: {} - Search results: found {} player(s) to show in the page number {}", Constants.Flag.OK, page.getNumberOfElements(), page.getNumber());
 		logger.info("Search status: {} - Search results: found {} player(s) to show in the page number {}", Constants.Flag.OK, page.getNumberOfElements(), page.getNumber());
 		return new PlayerPaginationResponse(new PlayerRequestBean(), Constants.Flag.OK, page.getTotalElements(), page);
 
@@ -122,12 +124,12 @@ public class PlayerServiceImpl implements PlayerService {
 
 
 		if(list.isEmpty()) {
-			logger.debug("Search status: {} - Search results: found {} player(s)", Constants.Flag.NO_PLAYER_FOUND, 0);
+			//logger.debug("Search status: {} - Search results: found {} player(s)", Constants.Flag.NO_PLAYER_FOUND, 0);
 			logger.info("Search status: {} ", Constants.Flag.NO_PLAYER_FOUND);
 			return new ListPlayerResponse(request, Constants.Flag.NO_PLAYER_FOUND, 0L, list); 
 		} 
 
-		logger.debug("Search status: {} - Search results: found {} player(s)", Constants.Flag.OK, list.size());
+		//logger.debug("Search status: {} - Search results: found {} player(s)", Constants.Flag.OK, list.size());
 		logger.info("Search status: {} - Search results: found {} player(s)", Constants.Flag.OK, list.size());
 		return new ListPlayerResponse(request, Constants.Flag.OK, (long)list.size(), list);
 	}
@@ -148,12 +150,12 @@ public class PlayerServiceImpl implements PlayerService {
 		request.setPlayerId(playerId);
 
 		if(! player.isPresent()){
-			logger.debug("Search status: {} - Search results: no one player with id {}", Constants.Flag.NO_PLAYER_FOUND, playerId);
+			//logger.debug("Search status: {} - Search results: no one player with id {}", Constants.Flag.NO_PLAYER_FOUND, playerId);
 			logger.info("Search status: {}", Constants.Flag.NO_PLAYER_FOUND);
 			return new SinglePlayerResponse(request, Constants.Flag.NO_PLAYER_FOUND, 0L, null); 
 		} 		
 
-		logger.debug("Search status: {} - Search results: found {}", Constants.Flag.OK, playerId);
+		//logger.debug("Search status: {} - Search results: found {}", Constants.Flag.OK, playerId);
 		logger.info("Search status: {} - Search results: found {}", Constants.Flag.OK, playerId);
 		return new SinglePlayerResponse(request, Constants.Flag.NO_PLAYER_FOUND, 1L, player.get()); 		
 	}
@@ -186,12 +188,12 @@ public class PlayerServiceImpl implements PlayerService {
 		List<Player> list = template.find(query, Player.class);
 
 		if(list.isEmpty()) {			
-			logger.debug("Search status: {} - Search results: found {} player(s) of 10 players", Constants.Flag.NO_PLAYER_FOUND, 0);
+			//logger.debug("Search status: {} - Search results: found {} player(s) of 10 players", Constants.Flag.NO_PLAYER_FOUND, 0);
 			logger.info("Search status: {}", Constants.Flag.NO_PLAYER_FOUND);
 			return new ListPlayerResponse(new PlayerRequestBean(), Constants.Flag.NO_PLAYER_FOUND, 0L, list);
 		} 
 
-		logger.debug("Search status: {} - Search results: found {} player(s) of 10 players", Constants.Flag.OK, list.size());
+		//logger.debug("Search status: {} - Search results: found {} player(s) of 10 players", Constants.Flag.OK, list.size());
 		logger.info("Search status: {} - Search results: found {} player(s) of 10 players", Constants.Flag.OK, list.size());
 		return new ListPlayerResponse(new PlayerRequestBean(), Constants.Flag.OK, (long)list.size(), list);
 	}
@@ -207,11 +209,11 @@ public class PlayerServiceImpl implements PlayerService {
 	public BasePlayerResponse<?> addPlayer(Player player) {
 		try {
 			repository.insert(player);
-			logger.debug("Player addedd succesfully: {}", player);
+			//logger.debug("Player addedd succesfully: {}", player);
 			logger.info("Player addedd succesfully: {} {}", player.getName(), player.getSurname());
 			return new PlayerInsertResponse(player, Constants.Flag.OK);
 		} catch(Exception ex) {
-			logger.debug("ERROR: {}", ex.getMessage());
+			//logger.debug("ERROR: {}", ex.getMessage());
 			logger.info("ERROR: {}", ex.getMessage());
 			return new PlayerInsertResponse(player, Constants.Flag.KO + " " + ex.getMessage());
 		}

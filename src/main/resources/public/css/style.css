@@ -28,7 +28,6 @@
     color: #fff !important;
 }
 
-
 .custom-btn-search {
     background-color: #94D2BD !important;
     border-color: #94D2BD !important;
@@ -66,25 +65,8 @@ legend {
     background-color: #fff;
 }
 
-.testSpinnerold {
-
-    
-    display: none;
-    position: absolute;
-    top:  50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    width: 45%;
-    height: 45%;
-    vertical-align: center;
-    z-index: 100;
-
-    animation-name: spinning;
-    animation-duration: 3s;
-    animation-iteration-count: infinite;
-    /* linear | ease | ease-in | ease-out | ease-in-out */
-    animation-timing-function: ease-in-out;
-    
+.centered-text {
+    text-align: center;
 }
 
 @keyframes spinning {

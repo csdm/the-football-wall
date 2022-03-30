@@ -7,3 +7,5 @@ springdoc:  api-docs:    enabled: true  swagger-ui:    enabled: true    pat
     
 logging:  file:    name: ./Logs/tfw-BE.log  logback:    rollingpolicy:      max-file-size: 1MB  pattern:    file: "%d{yyyy-MM-dd HH:mm:ss.SSS}  [%-1level] [%logger{100}]  **MSG: %msg%n"
     console: "%d{yyyy-MM-dd HH:mm:ss.SSS}  [%-1level] [%logger{100}]  **MSG: %msg%n"
+    
+server:  error:    whitelabel:      enabled: false          #path: /error -> if the path field hadn't been removed from the application.yml, the TFWErrorController could not recognize the error pages
