@@ -36,6 +36,10 @@ public class PlayerServiceImpl implements PlayerService {
 
 	@Autowired
 	MongoTemplate template;
+	
+	public List<Player> listAll() {
+		return repository.findAll(Sort.by("totalScore").descending());
+	}
 
 	/*****************************************************************
 	 * SERVICE METHOD

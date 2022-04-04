@@ -15,7 +15,7 @@ const API_GET_URL_TOPTEN = "/api/getplayer/topten";
 const API_GET_URL_BY_ID = '/api/getplayer';
 const API_GET_URL_PAGINATED = '/api/getplayer/all/paginated';
 const API_POST_URL = "/api/addplayer";
-
+const API_GET_EXPORT_EXCEL = "api/export/excel";
 
 /*****************************/
 

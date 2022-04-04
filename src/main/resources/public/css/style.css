@@ -105,3 +105,11 @@ legend {
       transform: rotate(360deg);
     }
   }
+
+  .cst {
+      background-color: red;
+  }
+
+  .cstd {
+      background-color: green;
+  }

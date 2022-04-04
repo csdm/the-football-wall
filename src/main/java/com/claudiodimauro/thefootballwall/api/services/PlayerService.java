@@ -1,5 +1,7 @@
 package com.claudiodimauro.thefootballwall.api.services;
 
+import java.util.List;
+
 import com.claudiodimauro.thefootballwall.api.beans.responses.BasePlayerResponse;
 import com.claudiodimauro.thefootballwall.api.models.Player;
 
@@ -10,4 +12,6 @@ public interface PlayerService {
 	public BasePlayerResponse<?> findPlayerByPlayerId(String playerId);
 	public BasePlayerResponse<?> findTopTenPlayers();
 	public BasePlayerResponse<?> addPlayer(Player player);
+	
+	public List<Player> listAll();
 }
