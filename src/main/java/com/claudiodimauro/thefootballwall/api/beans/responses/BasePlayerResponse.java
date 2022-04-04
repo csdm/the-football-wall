@@ -1,9 +1,6 @@
 package com.claudiodimauro.thefootballwall.api.beans.responses;
 
-import java.util.List;
-
 import com.claudiodimauro.thefootballwall.api.beans.requests.PlayerRequestBean;
-import com.claudiodimauro.thefootballwall.api.models.Player;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
