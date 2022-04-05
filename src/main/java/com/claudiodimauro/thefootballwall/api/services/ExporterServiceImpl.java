@@ -7,6 +7,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.claudiodimauro.thefootballwall.api.exporter.PlayerExcelExporter;
@@ -26,7 +27,7 @@ public class ExporterServiceImpl implements ExporterService {
 	 * DESCRIPTION: it loads the Excel file as inputStream 
 	 *****************************************************************/	
 	public ByteArrayInputStream loadExcelFile(boolean isNewExcel) {
-		List<Player> listPlayers = repository.findAll();
+		List<Player> listPlayers = repository.findAll(Sort.by("totalScore").descending());
 		PlayerExcelExporter exporter = new PlayerExcelExporter(isNewExcel, listPlayers);
 
 		ByteArrayInputStream inputStream = null;
