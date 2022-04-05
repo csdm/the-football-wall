@@ -36,10 +36,6 @@ public class PlayerServiceImpl implements PlayerService {
 
 	@Autowired
 	MongoTemplate template;
-	
-	public List<Player> listAll() {
-		return repository.findAll(Sort.by("totalScore").descending());
-	}
 
 	/*****************************************************************
 	 * SERVICE METHOD
@@ -93,7 +89,7 @@ public class PlayerServiceImpl implements PlayerService {
 		if(page == null) {
 			//logger.debug("Search status: {} - Search results: found {} player(s)", Constants.Flag.NO_PLAYER_FOUND, 0);
 			logger.info("Search status: {}", Constants.Flag.NO_PLAYER_FOUND);
-			
+
 			return new PlayerPaginationResponse(new PlayerRequestBean(), Constants.Flag.NO_PLAYER_FOUND, 0L, page);
 		} 
 

@@ -1,5 +1,7 @@
 package com.claudiodimauro.thefootballwall.api.exporter;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.List;
 
@@ -43,7 +45,6 @@ public class PlayerExcelExporter {
 		this.listPlayers = listPlayers;
 	}
 
-	
 	 private void createCell(Row row, int columnCount, Object value, CellStyle style) {
 	        sheet.autoSizeColumn(columnCount);
 	        
@@ -103,5 +104,15 @@ public class PlayerExcelExporter {
 		workbook.write(outputStream);
 		workbook.close();
 		outputStream.close();		
+	}
+	
+	public ByteArrayInputStream export() throws IOException {
+		writeHeaderRow();
+		writeDataRows();
+		
+		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+		workbook.write(outputStream);
+		workbook.close();
+		return new ByteArrayInputStream(outputStream.toByteArray());
 	}
 }

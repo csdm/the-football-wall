@@ -1,7 +1,6 @@
 package com.claudiodimauro.thefootballwall.api.controllers;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.validation.Valid;
 
@@ -23,15 +22,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.claudiodimauro.thefootballwall.api.beans.responses.BasePlayerResponse;
-import com.claudiodimauro.thefootballwall.api.beans.responses.ListPlayerResponse;
-import com.claudiodimauro.thefootballwall.api.beans.responses.PlayerInsertResponse;
 import com.claudiodimauro.thefootballwall.api.beans.responses.PlayerPaginationResponse;
-import com.claudiodimauro.thefootballwall.api.beans.responses.SinglePlayerResponse;
 import com.claudiodimauro.thefootballwall.api.beans.responses.generic.GenericResponse;
 import com.claudiodimauro.thefootballwall.api.dto.RequestPostDTO;
 import com.claudiodimauro.thefootballwall.api.models.Player;
 import com.claudiodimauro.thefootballwall.api.services.PlayerService;
-import com.claudiodimauro.thefootballwall.api.services.PlayerServiceImpl;
 import com.claudiodimauro.thefootballwall.utils.Constants;
 import com.claudiodimauro.thefootballwall.utils.enums.ElaborationStatus;
 
@@ -90,7 +85,6 @@ public class PlayerController {
 
 		return ResponseEntity.status(httpStatus).body(output);
 	}
-
 
 
 	/*****************************************************************
