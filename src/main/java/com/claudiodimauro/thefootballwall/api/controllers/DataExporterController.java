@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.claudiodimauro.thefootballwall.api.exporter.PlayerExcelExporter;
+import com.claudiodimauro.thefootballwall.api.exporter.PlayerPDFExporter;
 import com.claudiodimauro.thefootballwall.api.models.Player;
 import com.claudiodimauro.thefootballwall.api.services.ExporterService;
 import com.claudiodimauro.thefootballwall.api.services.ExporterServiceImpl;
@@ -50,7 +51,7 @@ public class DataExporterController {
 	 *****************************************************************/
 	@GetMapping("v0/excel")
 	public void exportToExcel(HttpServletResponse response) throws IOException {
-		logger.info("REST CALL - method: {} - path: {}", HttpMethod.GET, "/api/v0/export/excel");
+		logger.info("REST CALL - method: {} - path: {}", HttpMethod.GET, "/api/export/v0/excel");
 
 		response.setContentType("application/octet-stream");
 		//DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
@@ -117,6 +118,42 @@ public class DataExporterController {
 				.contentType(MediaType.parseMediaType("application/vdn.ms-excel"))
 				.body(file);
 	}
+	
+	@GetMapping("v0/pdf")
+	public void exportToPDF(HttpServletResponse response) {
+		logger.info("REST CALL - method: {} - path: {}", HttpMethod.GET, "/api/export/v0/pdf");
+
+		response.setContentType("application/octet-stream");
+		//DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+		DateFormat dateFormatter = new SimpleDateFormat("yyyyMMddHHmmss");
+		String currentDateTime = dateFormatter.format(new Date());
+
+		String headerKey = "Content-Disposition";
+		String headerValue = "attachment; filename=players_" + currentDateTime + ".pdf";
+		
+		response.setHeader(headerKey, headerValue);
+		
+		List<Player> listPlayers = (List<Player>) playerService.findAllPlayers().getPayload();
+		
+		PlayerPDFExporter exporter = new PlayerPDFExporter();
+		exporter.setListPlayers(listPlayers);
+		exporter.generatePDF(response);
+	}
+
+	/* da ultimare
+	@GetMapping("pdf")
+	public ResponseEntity<?> exportToPDF() {
+		logger.info("REST CALL - method: {} - path: {}", HttpMethod.GET, "/api/export/excel");
+		
+		HttpStatus httpStatus = HttpStatus.OK;
+		DateFormat dateFormatter = new SimpleDateFormat("yyyyMMddHHmmss");
+		String currentDateTime = dateFormatter.format(new Date());
+		String headerKey = HttpHeaders.CONTENT_DISPOSITION;
+		String headerValue = "attachment; filename=players_" + currentDateTime + ".pdf";
+		
+		return null;
+	}
+	*/
 
 }
 
