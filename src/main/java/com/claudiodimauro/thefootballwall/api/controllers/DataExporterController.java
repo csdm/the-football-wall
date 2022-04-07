@@ -18,6 +18,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,7 +27,6 @@ import com.claudiodimauro.thefootballwall.api.exporter.PlayerExcelExporter;
 import com.claudiodimauro.thefootballwall.api.exporter.PlayerPDFExporter;
 import com.claudiodimauro.thefootballwall.api.models.Player;
 import com.claudiodimauro.thefootballwall.api.services.ExporterService;
-import com.claudiodimauro.thefootballwall.api.services.ExporterServiceImpl;
 import com.claudiodimauro.thefootballwall.api.services.PlayerService;
 
 @RestController
@@ -50,6 +50,7 @@ public class DataExporterController {
 	 * 				the attached excel file
 	 *****************************************************************/
 	@GetMapping("v0/excel")
+	@CrossOrigin(origins = "http://127.0.0.1:5500")
 	public void exportToExcel(HttpServletResponse response) throws IOException {
 		logger.info("REST CALL - method: {} - path: {}", HttpMethod.GET, "/api/export/v0/excel");
 
@@ -89,6 +90,7 @@ public class DataExporterController {
 	 * DESCRIPTION: Return the response with the attached excel file
 	 *****************************************************************/
 	@GetMapping("excel")
+	@CrossOrigin(origins = "http://127.0.0.1:5500")
 	public ResponseEntity<?> exportToExcel() {
 		logger.info("REST CALL - method: {} - path: {}", HttpMethod.GET, "/api/export/excel");
 		
@@ -119,7 +121,15 @@ public class DataExporterController {
 				.body(file);
 	}
 	
+	/*****************************************************************
+	 * REST API
+	 * METHOD: get
+	 * PATH: /api/v0/export/pdf
+	 * DESCRIPTION: (First time implementation of pdf exporter) Return the response with 
+	 * 				the attached pdf file
+	 *****************************************************************/
 	@GetMapping("v0/pdf")
+	@CrossOrigin(origins = "http://127.0.0.1:5500")
 	public void exportToPDF(HttpServletResponse response) {
 		logger.info("REST CALL - method: {} - path: {}", HttpMethod.GET, "/api/export/v0/pdf");
 
@@ -139,7 +149,14 @@ public class DataExporterController {
 		exporter.export(response);
 	}
 
+	/*****************************************************************
+	 * REST API
+	 * METHOD: get
+	 * PATH: /api/export/pdf
+	 * DESCRIPTION: Return the response with the attached pdf file
+	 *****************************************************************/
 	@GetMapping("pdf")
+	@CrossOrigin(origins = "http://127.0.0.1:5500")
 	public ResponseEntity<?> exportToPDF() {
 		logger.info("REST CALL - method: {} - path: {}", HttpMethod.GET, "/api/export/excel");
 		

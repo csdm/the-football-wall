@@ -42,6 +42,11 @@ public class ExporterServiceImpl implements ExporterService {
 		return inputStream;
 	}
 	
+	/*****************************************************************
+	 * SERVICE METHOD
+	 * METHOD: loadPDFFile()
+	 * DESCRIPTION: it loads the PDF file as inputStream 
+	 *****************************************************************/	
 	public ByteArrayInputStream loadPDFFile() {
 		List<Player> listPlayers = repository.findAll(Sort.by("totalScore").descending());
 		PlayerPDFExporter exporter = new PlayerPDFExporter(listPlayers);
