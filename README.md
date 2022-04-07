@@ -59,14 +59,18 @@ This could appear as a non-sense schema, but as I said before, Kafka will be use
 ### APIs
 As already mentioned in the previous paragraph, the information relating to a player is kept within a MongoDB database and is accessed, entered or manipulated through REST APIs.  
 
-Method  | API Path             | Description
-------- | ---------------------| -------------------------
-GET     | `/api/getplayer/all` | Get a list of all football players and their skills
-GET     | `/api/getplayer/all/paginated` | Get a paginated list of all football players and their skills 
-GET     | `/getplayer/topten`  | Get the list of first ten players, ordered by total score
-GET     | `/api/getplayer`     | Get data about the spcified football player and his skills. The usable parameters are `surname` and `name`. The parameters are case insensitive.
-GET     | `/getplayer/{playerId}` | Get the data about the player specified by his playerId.
-POST    | `/api/addplayer`     | Add new player
+Method  | Controller               | API Path             | Description
+------- | -------------------------| ---------------------| ----------------
+GET     | player-controller        | `/api/getplayer/all` | Get a list of all football players and their skills
+GET     | player-controller        | `/api/getplayer/all/paginated` | Get a paginated list of all football players and their skills 
+GET     | player-controller        | `/getplayer/topten`  | Get the list of first ten players, ordered by total score
+GET     | player-controller        | `/api/getplayer`     | Get data about the spcified football player and his skills. The usable parameters are `surname` and `name`. The parameters are case insensitive.
+GET     | player-controller        | `/getplayer/{playerId}` | Get the data about the player specified by his playerId.
+POST    | player-controller        | `/api/addplayer`       | Add new player
+GET     | data-exporter-controller | `/api/export/v0/excel` | Add new player
+GET     | data-exporter-controller | `/api/export/v0/pdf`   | Add new player
+GET     | data-exporter-controller | `/api/export/excel`    | Add new player
+GET     | data-exporter-controller | `/api/export/pdf`      | Add new player
 
 **[Try the APIs](https://thefootballwall.herokuapp.com/try-api.html)**
 
