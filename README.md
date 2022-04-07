@@ -106,6 +106,9 @@ To get a non-paginated table, the user can click on the "Full ranking" button, o
   <img alt="rankingpage" src="./img/rankingpage.png" width="450" title="rankingpage" style="border: 1px solid #555">
 
 This table has the possibility to get a custom order that the user can choose. This ordering is implemented in a static way: the table is build by a REST API call and once it was created the data inside the table rows can be manipulated with an alghorithm ([click here](https://www.w3schools.com/howto/howto_js_sort_table.asp) to see the algorithm used) that allows the user to choose the order of table.  
+
+On the top-right corner of the table, there are two buttons that allows the download of data in an Excel or PDF file.  
+The extracted data are orderd by descending total score.
   
 When you click on a table row, you choose to see more information about the player associated to the row and a page will be opened and dynamically builded. This page will builded by a REST API get call and shows the data about the selected player:
 
