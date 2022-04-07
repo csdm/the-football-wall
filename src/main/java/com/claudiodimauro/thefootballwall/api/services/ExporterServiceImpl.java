@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.claudiodimauro.thefootballwall.api.exporter.PlayerExcelExporter;
+import com.claudiodimauro.thefootballwall.api.exporter.PlayerPDFExporter;
 import com.claudiodimauro.thefootballwall.api.models.Player;
 import com.claudiodimauro.thefootballwall.api.repositories.PlayerRepository;
 
@@ -35,6 +36,21 @@ public class ExporterServiceImpl implements ExporterService {
 		try {
 			inputStream = exporter.export();
 		} catch(IOException ex) {
+			logger.error(ex.getMessage());			
+		}
+
+		return inputStream;
+	}
+	
+	public ByteArrayInputStream loadPDFFile() {
+		List<Player> listPlayers = repository.findAll(Sort.by("totalScore").descending());
+		PlayerPDFExporter exporter = new PlayerPDFExporter(listPlayers);
+
+		ByteArrayInputStream inputStream = null;
+
+		try {
+			inputStream = exporter.export();
+		} catch(Exception ex) {
 			logger.error(ex.getMessage());			
 		}
 

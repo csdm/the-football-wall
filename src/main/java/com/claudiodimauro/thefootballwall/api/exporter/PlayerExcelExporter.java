@@ -61,7 +61,7 @@ public class PlayerExcelExporter {
 	        cell.setCellStyle(style);
 	    }
 	     
-	public void writeHeaderRow() {
+	 private void writeHeaderRow() {
 		Row row = sheet.createRow(0);
 
 		headerRowFont.setFontHeightInPoints((short) 12);
@@ -76,7 +76,7 @@ public class PlayerExcelExporter {
 		createCell(row, 4, "Nationality", headerRowStyle);
 	}
 	
-	public void writeDataRows() {
+	 private void writeDataRows() {
 		int rowCount = 1;
 
 		dataRowFont.setFontHeightInPoints((short) 10);

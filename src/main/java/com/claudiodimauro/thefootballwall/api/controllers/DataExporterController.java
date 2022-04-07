@@ -123,7 +123,7 @@ public class DataExporterController {
 	public void exportToPDF(HttpServletResponse response) {
 		logger.info("REST CALL - method: {} - path: {}", HttpMethod.GET, "/api/export/v0/pdf");
 
-		response.setContentType("application/octet-stream");
+		response.setContentType("application/pdf");
 		//DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
 		DateFormat dateFormatter = new SimpleDateFormat("yyyyMMddHHmmss");
 		String currentDateTime = dateFormatter.format(new Date());
@@ -135,12 +135,10 @@ public class DataExporterController {
 		
 		List<Player> listPlayers = (List<Player>) playerService.findAllPlayers().getPayload();
 		
-		PlayerPDFExporter exporter = new PlayerPDFExporter();
-		exporter.setListPlayers(listPlayers);
-		exporter.generatePDF(response);
+		PlayerPDFExporter exporter = new PlayerPDFExporter(listPlayers);
+		exporter.export(response);
 	}
 
-	/* da ultimare
 	@GetMapping("pdf")
 	public ResponseEntity<?> exportToPDF() {
 		logger.info("REST CALL - method: {} - path: {}", HttpMethod.GET, "/api/export/excel");
@@ -151,9 +149,17 @@ public class DataExporterController {
 		String headerKey = HttpHeaders.CONTENT_DISPOSITION;
 		String headerValue = "attachment; filename=players_" + currentDateTime + ".pdf";
 		
-		return null;
+		InputStreamResource file = new InputStreamResource(exporterService.loadPDFFile());
+		
+		logger.info("Produced {} : {}", headerKey, headerValue);
+		
+		return ResponseEntity
+				.status(httpStatus)
+				.header(headerKey, headerValue)
+				.contentType(MediaType.parseMediaType("application/pdf"))
+				.body(file);
 	}
-	*/
+
 
 }
 

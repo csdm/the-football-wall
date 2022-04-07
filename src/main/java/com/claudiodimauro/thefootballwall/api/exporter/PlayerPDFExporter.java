@@ -1,12 +1,16 @@
 package com.claudiodimauro.thefootballwall.api.exporter;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.lang.Nullable;
 
 import com.claudiodimauro.thefootballwall.api.controllers.DataExporterController;
 import com.claudiodimauro.thefootballwall.api.models.Player;
@@ -25,21 +29,29 @@ import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 
+import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@NoArgsConstructor
+@AllArgsConstructor
 @Setter
 public class PlayerPDFExporter {
 	private static final Logger logger = LoggerFactory.getLogger(DataExporterController.class);
 
 	private List<Player> listPlayers;
-
-	public void generatePDF(HttpServletResponse response) {
+	
+	private OutputStream PDFBuilder(HttpServletResponse response) throws IOException{
+		OutputStream outputStream = null;
 		Document doc = new Document(PageSize.A4);
 		
+		if(response != null) {
+			outputStream = response.getOutputStream();
+		} else {
+			outputStream = new ByteArrayOutputStream();
+		}
+		
 		try {
-			PdfWriter.getInstance(doc, response.getOutputStream());
+			PdfWriter.getInstance(doc, outputStream);
 			
 			HeaderFooter header = new HeaderFooter(new Phrase("The Football Wall"), false);
 			header.setBorder(Rectangle.NO_BORDER); 
@@ -108,10 +120,31 @@ public class PlayerPDFExporter {
 			doc.add(playersTable);
 		} catch(DocumentException ex) {		
 			logger.error(ex.getMessage());
-		} catch(IOException ex) {
-			logger.error(ex.getMessage());
-		} finally {
+		}  finally {
 			doc.close();
 		}
+		
+		return outputStream;		
 	}
+	
+	
+	public void export(HttpServletResponse response) {
+		try {
+			PDFBuilder(response);
+		} catch(IOException ex) {
+			logger.error(ex.getMessage());
+		}
+	}
+	
+	public ByteArrayInputStream export() {
+		ByteArrayOutputStream outputStream = null; 
+		
+		try{
+			outputStream = (ByteArrayOutputStream)PDFBuilder(null);
+		} catch(IOException ex) {
+			logger.error(ex.getMessage());
+		}
+		
+		return new ByteArrayInputStream(outputStream.toByteArray());
+	} 
 }
