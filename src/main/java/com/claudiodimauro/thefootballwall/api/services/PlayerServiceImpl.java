@@ -1,10 +1,17 @@
 package com.claudiodimauro.thefootballwall.api.services;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import org.bson.types.ObjectId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +22,12 @@ import org.springframework.data.domain.Sort.Order;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.gridfs.GridFsOperations;
+import org.springframework.data.mongodb.gridfs.GridFsTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.mock.web.MockMultipartFile;
+
 
 import com.claudiodimauro.thefootballwall.api.beans.requests.PlayerRequestBean;
 import com.claudiodimauro.thefootballwall.api.beans.responses.BasePlayerResponse;
@@ -26,6 +38,9 @@ import com.claudiodimauro.thefootballwall.api.beans.responses.SinglePlayerRespon
 import com.claudiodimauro.thefootballwall.api.models.Player;
 import com.claudiodimauro.thefootballwall.api.repositories.PlayerRepository;
 import com.claudiodimauro.thefootballwall.utils.Constants;
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBObject;
+import com.mongodb.client.gridfs.model.GridFSFile;
 
 @Service("PlayerServiceImpl")
 public class PlayerServiceImpl implements PlayerService {
@@ -36,6 +51,12 @@ public class PlayerServiceImpl implements PlayerService {
 
 	@Autowired
 	MongoTemplate template;
+	
+	@Autowired
+	GridFsTemplate gridFsTemplate;
+	
+	@Autowired
+	GridFsOperations gridFsOperations;
 
 	/*****************************************************************
 	 * SERVICE METHOD
@@ -209,14 +230,113 @@ public class PlayerServiceImpl implements PlayerService {
 	public BasePlayerResponse<?> addPlayer(Player player) {
 		try {
 			repository.insert(player);
+			savePlayerImage(player.getPlayerId(), true); //saving full image
+			savePlayerImage(player.getPlayerId(), false); //saving thumbnail image
+			
 			//logger.debug("Player addedd succesfully: {}", player);
 			logger.info("Player addedd succesfully: {} {}", player.getName(), player.getSurname());
+			
 			return new PlayerInsertResponse(player, Constants.Flag.OK);
 		} catch(Exception ex) {
 			//logger.debug("ERROR: {}", ex.getMessage());
 			logger.info("ERROR: {}", ex.getMessage());
 			return new PlayerInsertResponse(player, Constants.Flag.KO + " " + ex.getMessage());
 		}
+	}
+
+
+	/*****************************************************************
+	 * SERVICE METHOD
+	 * METHOD: showImage(String playerId, boolean isFullImage)
+	 * DESCRIPTION: This method retrieve and return as InputStream an image
+	 * 				from MongoDB using GridFS
+	 * 
+	 *****************************************************************/
+	public InputStream showImage(String playerId, boolean isFullImage) {
+		GridFSFile gridFsFile = null;
+		InputStream inputStream = null;
+		
+		try {
+			gridFsFile = gridFsTemplate.findOne(new Query(Criteria
+					.where("metadata.playerId").is(playerId)
+					.and("metadata.isFullImage").is(isFullImage)
+					.and("metadata.isThumbnailImage").is(!isFullImage) //superfluo
+					));
+			inputStream = gridFsOperations.getResource(gridFsFile).getInputStream();
+		} catch(IOException ex) {
+			logger.error(ex.getMessage());
+		}
+		
+		return inputStream;
+	}
+	
+	
+	/*****************************************************************
+	 * SUPPORT METHOD
+	 * METHOD: savePlayerImage(String playerId, boolean isFullImage)
+	 * DESCRIPTION: It save the football player image both for full and thumbnail 
+	 * 				images
+	 * 
+	 *****************************************************************/
+	private void savePlayerImage(String playerId, boolean isFullImage) {
+		String staticFilename = playerId + ".png";
+//		String staticThumbnailImageURI = "https://media.contentapi.ea.com/content/dam/ea/fifa/fifa-21/ratings-collective/f20assets/player-headshots/" + staticFilename; 
+//		String staticFullImageURI = "https://media.contentapi.ea.com/content/dam/ea/fifa/fifa-21/ratings-collective/f20assets/player-shields/" + staticFilename;
+		
+		
+		//mocked images
+		String staticThumbnailImageURI = "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/SIPI_Jelly_Beans_4.1.07.tiff/lossy-page1-256px-SIPI_Jelly_Beans_4.1.07.tiff.jpg"; 
+		String staticFullImageURI = "https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80";
+		
+		String fileType = ""; 
+		
+		URL url = null; 
+		MultipartFile file = null;
+		DBObject metadata = new BasicDBObject();
+		
+		try {			
+			if(isFullImage) {
+				fileType = staticFullImageURI.substring(staticFullImageURI.lastIndexOf(".")+1);
+				staticFullImageURI.substring(staticFullImageURI.lastIndexOf(".")+1);
+				url = new URL(staticFullImageURI);
+				URLConnection connection = url.openConnection();
+				InputStream inputStream = connection.getInputStream();
+				
+				file = new MockMultipartFile("img-full", staticFilename, "image/" + fileType, inputStream);
+								
+				metadata.put("filename", file.getOriginalFilename());
+				metadata.put("playerId", playerId);
+				metadata.put("uri", staticFullImageURI);
+				metadata.put("isFullImage", true);
+				metadata.put("isThumbnailImage", false);
+				metadata.put("insertDate", new Date());
+			} else {
+				fileType = staticThumbnailImageURI.substring(staticThumbnailImageURI.lastIndexOf(".")+1);
+				url = new URL(staticThumbnailImageURI);
+				URLConnection connection = url.openConnection();
+				InputStream inputStream = connection.getInputStream();
+				
+				file = new MockMultipartFile("img-thumb", staticFilename, "image/" + fileType, inputStream);
+				
+				metadata.put("filename", file.getOriginalFilename());
+				metadata.put("playerId", playerId);
+				metadata.put("uri", staticThumbnailImageURI);
+				metadata.put("isFullImage", false);
+				metadata.put("isThumbnailImage", true);
+				metadata.put("insertDate", new Date());
+			}				
+			
+			
+		gridFsTemplate.store(file.getInputStream(), file.getOriginalFilename(), file.getContentType(), metadata);
+		logger.info("Saved {} - {} - isFullImage {}", file.getContentType(), file.getOriginalFilename(), metadata.get("isFullImage").toString());
+			
+		} catch(MalformedURLException ex) {
+			logger.error(ex.getMessage());
+		} catch(Exception ex) {
+			logger.error(ex.getMessage());
+		}
+
+
 	}
 
 }

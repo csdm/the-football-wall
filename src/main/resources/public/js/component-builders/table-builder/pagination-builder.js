@@ -26,7 +26,7 @@ function paginatedTableBuilder(response) {
     tableBody.innerHTML = `
         ${players.map(function (player, i) {
         return `<tr class="zoom-row" style="cursor: pointer" onclick="pageReload(${player.playerId})">
-                                <td><img src="https://media.contentapi.ea.com/content/dam/ea/fifa/fifa-21/ratings-collective/f20assets/player-headshots/${player.playerId}.png" alt="${player.name} ${player.surname}"width="55"></td>
+                                <td><img src="/api/asset/getImage?playerId=${player.playerId}&isFullImage=false" alt="${player.name} ${player.surname}"width="55"></td>
                                 <td>${player.totalScore}</td>
                                 <td>${player.surname}</td>
                                 <td>${player.name}</td>

@@ -26,7 +26,8 @@ const modalBuilder = (response) => {
     <div class="container mx-1">
         <div class="row">
             <div class="col-sm-auto m-0">
-                <img src="https://media.contentapi.ea.com/content/dam/ea/fifa/fifa-21/ratings-collective/f20assets/player-headshots/${player.playerId}.png" alt="${player.name} ${player.surname} "width="55">
+			
+                <img src="/api/asset/getImage?playerId=${player.playerId}&isFullImage=false" alt="${player.name} ${player.surname} "width="55">
             </div>
             <div class="col-sm-auto m-0 p-auto">
                 <h2 class="modal-title" id="modalTitle">${player.name} ${player.surname}</h2>
@@ -47,7 +48,7 @@ const modalBuilder = (response) => {
     <div class="container">
 		<div class="row mt-3">
 			<div class="col-md-4 py-0 px-0 text-center">
-				<img src="https://media.contentapi.ea.com/content/dam/ea/fifa/fifa-21/ratings-collective/f20assets/player-shields/${player.playerId}.png"
+				<img src="/api/asset/getImage?playerId=${player.playerId}&isFullImage=true"
 					width="250">
 			</div>
 			<div class="col-md-8 pb-3">

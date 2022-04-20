@@ -24,7 +24,8 @@ function buildTable(response) {
     newRow.setAttribute("style", "cursor: pointer");
 
     let cellImg = document.createElement("td");
-    cellImg.innerHTML = `<img src="https://media.contentapi.ea.com/content/dam/ea/fifa/fifa-21/ratings-collective/f20assets/player-headshots/${player.playerId}.png" alt="${player.name} ${player.surname}"width="55">`;
+    //cellImg.innerHTML = `<img src="https://media.contentapi.ea.com/content/dam/ea/fifa/fifa-21/ratings-collective/f20assets/player-headshots/${player.playerId}.png" alt="${player.name} ${player.surname}"width="55">`;
+    cellImg.innerHTML = `<img src="/api/asset/getImage?playerId=${player.playerId}&isFullImage=false" alt="${player.name} ${player.surname}"width="55">`;
     newRow.appendChild(cellImg);
 
     let cellTotalScore = document.createElement("td");

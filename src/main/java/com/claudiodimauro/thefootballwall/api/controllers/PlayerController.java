@@ -1,7 +1,9 @@
 package com.claudiodimauro.thefootballwall.api.controllers;
 
+import java.io.IOException;
 import java.util.Date;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -11,6 +13,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,6 +34,7 @@ import com.claudiodimauro.thefootballwall.utils.Constants;
 import com.claudiodimauro.thefootballwall.utils.enums.ElaborationStatus;
 
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
@@ -284,6 +288,31 @@ public class PlayerController {
 		return ResponseEntity.status(httpStatus).body(output);
 	}
 
+	
+	/*****************************************************************
+	 * REST API
+	 * METHOD: get
+	 * PATH: /asset/getPlayer}
+	 * DESCRIPTION: It returns the image associated to the passed parameters 
+	 * 				(playerId and isFullImage)
+	 *****************************************************************/
+	@GetMapping("asset/getImage")
+	public void getImage(
+			@RequestParam(required = true) String playerId, 
+			@RequestParam(required = true) boolean isFullImage,
+			HttpServletResponse response
+			) {
+		
+		try {
+			logger.info("REST CALL - method: {} - path: {} - searchKey: {} - isFullImage: {}", HttpMethod.GET, "api/asset/getImage", playerId);
+			FileCopyUtils.copy(service.showImage(playerId, isFullImage), response.getOutputStream());
+		} catch(IOException ex) {
+			logger.error(ex.getMessage());
+		}
+		
+		
+	}
+	
 	
 	/*****************************************************************
 	 * REST API

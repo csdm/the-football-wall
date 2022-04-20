@@ -29,7 +29,7 @@ function buildCards(response) {
 
         let img = document.createElement("img");
         img.setAttribute("class", "card-img-top");
-        img.setAttribute("src", `https://media.contentapi.ea.com/content/dam/ea/fifa/fifa-21/ratings-collective/f20assets/player-shields/${player.playerId}.png`);
+        img.setAttribute("src", `/api/asset/getImage?playerId=${player.playerId}&isFullImage=true`);
         img.setAttribute("alt", `${player.name} ${player.surname}`);
 
         let cardBody = document.createElement("div");

@@ -19,4 +19,9 @@ public interface Constants {
 		  String P_SKILLS = "skills";
 		  String P_STATISTICS = "statistics";
 	}
+	
+	public interface ImageType {
+		String FULL = "full";
+		String THUMBNAIL = "thumbnail";
+	}
 }

@@ -30,7 +30,7 @@ function pageBuilder(response) {
     <div class="col-sm-auto m-0 shadow-lg p-0 mb-5 bg-body rounded"
         style="background-image: url('https://ae01.alicdn.com/kf/HTB1SajMSpXXXXc8XVXXq6xXFXXXz/8x8FT-spot-luce-notturna-calcio-campo-da-calcio-piattaforma-stadio-foto-personalizzata-sfondo-Studio-sfondi-vinile.jpg_Q90.jpg_.webp'); background-size: cover;">
         <img class="" width="200"
-        src="https://media.contentapi.ea.com/content/dam/ea/fifa/fifa-21/ratings-collective/f20assets/player-headshots/${player.playerId}.png" alt="${player.name} ${player.surname}">
+        src="/api/asset/getImage?playerId=${player.playerId}&isFullImage=false" alt="${player.name} ${player.surname}">
     </div>
     <div class="col ms-3">
         <div class="row">
