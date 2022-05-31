@@ -280,13 +280,13 @@ public class PlayerServiceImpl implements PlayerService {
 	 *****************************************************************/
 	private void savePlayerImage(String playerId, boolean isFullImage) {
 		String staticFilename = playerId + ".png";
-//		String staticThumbnailImageURI = "https://media.contentapi.ea.com/content/dam/ea/fifa/fifa-21/ratings-collective/f20assets/player-headshots/" + staticFilename; 
-//		String staticFullImageURI = "https://media.contentapi.ea.com/content/dam/ea/fifa/fifa-21/ratings-collective/f20assets/player-shields/" + staticFilename;
+		String staticThumbnailImageURI = "https://media.contentapi.ea.com/content/dam/ea/fifa/fifa-21/ratings-collective/f20assets/player-headshots/" + staticFilename; 
+		String staticFullImageURI = "https://media.contentapi.ea.com/content/dam/ea/fifa/fifa-21/ratings-collective/f20assets/player-shields/" + staticFilename;
 		
 		
 		//mocked images
-		String staticThumbnailImageURI = "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/SIPI_Jelly_Beans_4.1.07.tiff/lossy-page1-256px-SIPI_Jelly_Beans_4.1.07.tiff.jpg"; 
-		String staticFullImageURI = "https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80";
+//		String staticThumbnailImageURI = "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/SIPI_Jelly_Beans_4.1.07.tiff/lossy-page1-256px-SIPI_Jelly_Beans_4.1.07.tiff.jpg"; 
+//		String staticFullImageURI = "https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80";
 		
 		String fileType = ""; 
 		
