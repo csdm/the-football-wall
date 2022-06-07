@@ -12,6 +12,7 @@ The Football Wall is a full-stack project I made to learn or better understand s
     * Database:
         * _SQL_: Oracle (**to be**)
         * _NO SQL_: MongoDB
+          * GridFS
 * **Front-end:**
     * HTML5
     * CSS3
