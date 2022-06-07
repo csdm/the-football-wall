@@ -30,6 +30,7 @@ The Football Wall is a full-stack project I made to learn or better understand s
   - [APIs](#apis)
   - [Logs](#logs)
     - [Example of log search](#example-of-log-search)
+  - [Data storage](#data-storage)
 - [Front-end](#front-end)
   - [The FE structure](#the-fe-structure)
 - [The environment](#the-environment)
@@ -94,6 +95,11 @@ clear; zgrep <string_to_retrieve> ./*2022-02-17*.gz
 ```  
 
 ----
+### Data storage
+The data are stored into a MongoDB database. A collection called "players", handle all documents containing information about players and these documents are used when the frontend need to show players informations.  
+In a first time, the imagese associated to a player were retrieved and showed directly from the Fifa21 CDN. With a new version, I used MongoDB with GridFS to download the images and store them into my db. Now the shown images are retrieved from my own db.
+
+----
 ## Front-end
 The front-end was developed using the "old school" tools: HTML5, CSS3 and JavaScript Vanilla.  
 Why I used JavaScript vanilla? Because I didn't know well this programming languagge: I've use it often but with but with a superficial knowledge of it. So I decided to build this project starting from primordial style of coding. It wouldn't have made sense to use more modern frameworks like Angular or React without a good knowledge of JavaScript.  
@@ -141,7 +147,18 @@ Before merging under unique build path the front-end and the back-end, I used th
 @CrossOrigin(origins = "http://127.0.0.1:5500")
 ```
 which specifies the address of the api users.  
-To use the db, I used an instance of MongoDB by creating a Docker container and I used it on localhost:27017.
+To use the db, I used an instance of MongoDB by creating a Docker container and I used it on localhost:27017.  
+
+Try it yourself using the following simple docker-compose.yml:
+```Yml
+version: "3.8"
+services:
+    TFWLocalDB:
+        image: mongo:latest
+        container_name: TFWLocalDB
+        ports:
+            - 27017:27017
+```
 
 ### Production Environment
 The web-app was deployed using **Heroku**[^1], and you can try it by [clicking here](https://thefootballwall.heroku.com). 
